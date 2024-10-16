@@ -1,6 +1,6 @@
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { pages, PageType } from '@/utils/constants/pages';
 import './App.css'
-import { Route, Router, Routes } from 'react-router-dom'
-import { pages, PageType } from '@/utils/constants/pages'
 
 function App() {
 

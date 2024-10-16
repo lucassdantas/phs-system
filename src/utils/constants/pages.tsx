@@ -1,10 +1,9 @@
 import { ReactElement } from "react";
-import { Home } from '@/pages/Home';
-import { About } from "@/pages/About";
-import {Services} from "@/pages/Services";
-import {Contact} from "@/pages/Contact";
 import {Policy} from "@/pages/Policy";
 import {Terms} from "@/pages/Terms";
+import { Login } from "@/pages/Login";
+import { MyAccount } from "@/pages/MyAccount";
+import { Lessons } from "@/pages/Lessons";
 
 export type PageType = {
   title:string;
@@ -14,33 +13,24 @@ export type PageType = {
 }
 export const pages:PageType[] = [
   {
-    title:'Home',
+    title:'Login',
     url:'/',
-    component:<Home/>,
+    component:<Login/>,
+    showOnHeader:true
+  },
+  {
+    title:'Palestras',
+    url:'/',
+    component:<Lessons/>,
+    showOnHeader:true
+  },
+  {
+    title:'Minha conta',
+    url:'/minha-conta',
+    component:<MyAccount/>,
     showOnHeader:true
   },
   
-  {
-    title:'Serviços',
-    url:'/servicos',
-    component:<Services/>,
-    showOnHeader:true
-  },
-
-
-  {
-    title:'Conheça a CeC',
-    url:'/conheca-a-cec',
-    component:<About/>,
-    showOnHeader:true
-  },
-
-  {
-    title:'Contato',
-    url:'/contato',
-    component:<Contact/>,
-    showOnHeader:true
-  },
   {
     title:'Política de privacidade',
     url:'/politica-de-privacidade',
