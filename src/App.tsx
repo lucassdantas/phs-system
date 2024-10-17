@@ -1,16 +1,35 @@
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import { pages, PageType } from '@/utils/constants/pages';
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import { Login } from "@/pages/Login";
+import { MyAccount } from "@/pages/MyAccount";
+import { Lessons } from "@/pages/Lessons";
+import "./App.css";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { AuthProvider } from "@/hooks/UseAuth";
 
 function App() {
-
   return (
-    <Router>
+    <AuthProvider>
       <Routes>
-        {pages.map((page:PageType) => <Route path={page.url} element={page.component} key={page.url} />)}
+        <Route 
+          path="/" 
+          element={
+            <ProtectedRoute>
+              <Lessons/>
+            </ProtectedRoute>
+          } 
+        />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/minha-conta"
+          element={
+            <ProtectedRoute>
+              <MyAccount />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-    </Router>
-  )
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;

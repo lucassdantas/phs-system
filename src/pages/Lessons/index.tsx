@@ -1,7 +1,11 @@
+import { Template } from '@/components/Template'
 import React from 'react'
 
 export const Lessons = () => {
   return (
-    <div>Lessons</div>
+    <Template pageTitle='Aulas'>
+      <div>Lessons</div>
+
+    </Template>
   )
 }
