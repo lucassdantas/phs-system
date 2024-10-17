@@ -4,7 +4,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use \Firebase\JWT\JWT;
 
 class JWTUtils {
-    private static $secret_key = 'your-secret-key'; // Altere para uma chave mais segura
+    private static $secret_key = 'lucas'; // Altere para uma chave mais segura
     private static $algorithm = 'HS256'; // Algoritmo de assinatura
 
     // Gerar token JWT

@@ -6,7 +6,7 @@ require 'vendor/autoload.php'; // Inclua seu pacote JWT
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
 
-$secret_key = "your_secret_key";
+$secret_key = "lucas";
 
 // Obtém o token do corpo da requisição
 $data = json_decode(file_get_contents("php://input"));

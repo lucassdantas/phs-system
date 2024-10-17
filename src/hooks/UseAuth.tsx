@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, ReactNode } from "react";
+import { createContext, useContext, useMemo, ReactNode, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import axios from "axios";
@@ -15,26 +15,21 @@ type User = {
 const AuthContext = createContext<any>(null);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  // Tipar corretamente o user como User | null
   const [user, setUser] = useLocalStorage<User | null>("user", null);
-  const [token, setToken] = useLocalStorage<string | null>("token", null); // Armazena o token JWT
+  const [token, setToken] = useLocalStorage<string | null>("token", null);
   const navigate = useNavigate();
 
-  // Função de login com tipagem adequada
+  // Função de login
   const login = async (data: { username: string; password: string }) => {
     try {
-      // Faz a requisição de login para o backend
       const response = await axios.post("http://localhost/backend/login.php", {
         username: data.username,
         password: data.password,
       });
-      // Recebe o token do backend
       const { token, username } = response.data;
 
-      // Armazena o token no localStorage
       setToken(token);
-      setUser({ username }); // Define o username corretamente no estado do user
-
+      setUser({ username });
       navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
@@ -44,9 +39,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   // Função de logout
   const logout = () => {
-    setUser(null); // Remove o user
-    setToken(null); // Remove o token
-    navigate("/", { replace: true });
+    setUser(null);
+    setToken(null);
+    navigate("/login", { replace: true });
   };
 
   // Função para verificar se o usuário está logado
@@ -54,18 +49,29 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     if (!token) return false;
 
     try {
-      // Verifica o token com o backend
       const response = await axios.post("http://localhost/backend/verifyToken.php", {
         token,
       });
-
-      // Se o token for válido, o backend retornará um status de sucesso
       return response.data.valid;
     } catch (error) {
       console.error("Token verification failed:", error);
       return false;
     }
   };
+
+  // Verifica a autenticidade do token ao carregar a aplicação
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const valid = await isAuthenticated();
+      console.log("Token válido:", valid); // Log para depuração
+      if (!valid) {
+        logout(); // Chama o logout se o token não for válido
+        navigate("/login"); // Redireciona para a página de login
+      }
+    };
+
+    checkAuthentication();
+  }, [token, navigate]);
 
   const value = useMemo(
     () => ({
@@ -74,7 +80,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       logout,
       isAuthenticated,
     }),
-    [user, token] // Dependências para o memo
+    [user, token]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
