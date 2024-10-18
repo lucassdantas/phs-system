@@ -16,7 +16,6 @@ export const Header = ({isHomepage=false}:{isHomepage?:boolean}) => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   return (
     <header className="bg-white shadow-md">
-      <SuperHeader />
       <Limiter className="py-2 lg:px-0 px-4">
         <div className="flex flex-col md:flex-row items-center relative">
           
@@ -33,8 +32,8 @@ export const Header = ({isHomepage=false}:{isHomepage?:boolean}) => {
 
           <MobileMenu toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}/>
 
-          <div className="hidden lg:flex items-center w-full md:w-1/5 justify-center md:justify-end"  onClick={() => handleLogout()}>
-            <Button fontSize="sm" />
+          <div className="hidden lg:flex items-center w-full md:w-1/5 justify-center md:justify-end cursor-pointer"  onClick={() => handleLogout()}>
+            <span>Logout</span>
           </div>
         </div>
       </Limiter>

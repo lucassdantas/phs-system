@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useLocalStorage<string | null>("token", null);
   const navigate = useNavigate();
 
-  // Função de login
   const login = async (data: { username: string; password: string }) => {
     try {
       const response = await axios.post("http://localhost/backend/login.php", {
@@ -37,14 +36,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  // Função de logout
   const logout = () => {
     setUser(null);
     setToken(null);
     navigate("/login", { replace: true });
   };
 
-  // Função para verificar se o usuário está logado
   const isAuthenticated = async () => {
     if (!token) return false;
 
@@ -63,7 +60,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     const checkAuthentication = async () => {
       const valid = await isAuthenticated();
-      console.log("Token válido:", valid); // Log para depuração
+      console.log("Token válido:", valid); 
       if (!valid) {
         logout(); // Chama o logout se o token não for válido
         navigate("/login"); // Redireciona para a página de login
