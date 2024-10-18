@@ -1,2 +1,2 @@
-//export const backendUrl = 'http://localhost/back-end/'
-export const backendUrl = 'https://newsite.cecconsultores.com.br/back-end/'
+export const backendUrl = 'http://localhost/backend'
+//export const backendUrl = 'https://membros.phssystem.com.br/back-end'

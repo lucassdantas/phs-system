@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Serviço MySQL
+  mysql:
+    image: mysql:latest
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword   # Senha para o usuário root
+      MYSQL_DATABASE: phssystem           # Banco de dados inicial
+      MYSQL_USER: user                    # Nome do usuário
+      MYSQL_PASSWORD: userpassword        # Senha do usuário
+    ports:
+      - "3306:3306"  # Porta exposta para o MySQL
+    volumes:
+      - mysql_data:/var/lib/mysql         # Persistência dos dados MySQL
+
+  # Serviço phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin_container
+    restart: always
+    environment:
+      PMA_HOST: mysql                     # Serviço MySQL definido acima
+      PMA_PORT: 3306                      # Porta MySQL
+    ports:
+      - "3001:80"  # Porta para acessar o phpMyAdmin no navegador
+
+# Volume para persistência dos dados
+volumes:
+  mysql_data:

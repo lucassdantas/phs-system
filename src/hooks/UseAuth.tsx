@@ -2,6 +2,7 @@ import { createContext, useContext, useMemo, ReactNode, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import axios from "axios";
+import { backendUrl } from "@/utils/constants/siteInfos";
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -21,7 +22,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const login = async (data: { username: string; password: string }) => {
     try {
-      const response = await axios.post("http://localhost/backend/login.php", {
+      const response = await axios.post(`${backendUrl}/login.php`, {
         username: data.username,
         password: data.password,
       });
@@ -46,9 +47,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     if (!token) return false;
 
     try {
-      const response = await axios.post("http://localhost/backend/verifyToken.php", {
+      const response = await axios.post(`${backendUrl}/verifyToken.php`, {
         token,
       });
+      console.log(response)
       return response.data.valid;
     } catch (error) {
       console.error("Token verification failed:", error);
@@ -60,7 +62,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     const checkAuthentication = async () => {
       const valid = await isAuthenticated();
-      console.log("Token válido:", valid); 
       if (!valid) {
         logout(); // Chama o logout se o token não for válido
         navigate("/login"); // Redireciona para a página de login

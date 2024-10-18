@@ -15,9 +15,10 @@ if (!empty($data->token)) {
     try {
         // Decodifica o JWT
         $decoded = JWT::decode($data->token, new Key($secret_key, 'HS256'));
-
         // Resposta de sucesso
-        echo json_encode(["valid" => true]);
+        $decoded->isJwtAuthenticated = true;
+        $jwtData = json_encode($decoded);
+        echo json_encode(["valid" => true, "jwtData" => $jwtData]);
     } catch (Exception $e) {
         // Token inválido
         echo json_encode(["valid" => false]);

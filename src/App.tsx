@@ -5,6 +5,9 @@ import { Lessons } from "@/pages/Lessons";
 import "./App.css";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { AuthProvider } from "@/hooks/UseAuth";
+import { Policy } from "@/pages/Policy";
+import { Terms } from "@/pages/Terms";
+import { Admin } from "@/pages/Admin";
 
 function App() {
   return (
@@ -19,11 +22,21 @@ function App() {
           } 
         />
         <Route path="/login" element={<Login />} />
+        <Route path="/politica-de-privacidade" element={<Policy />} />
+        <Route path="/termos-de-uso" element={<Terms />} />
         <Route
           path="/minha-conta"
           element={
             <ProtectedRoute>
               <MyAccount />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <Admin />
             </ProtectedRoute>
           }
         />

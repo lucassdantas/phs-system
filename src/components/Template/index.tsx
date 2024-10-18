@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
+import { CookieBar } from '@/components/CookieBar';
 
 type TemplateProps = {
   children:ReactNode;
@@ -13,6 +14,7 @@ export const Template = ({children, pageTitle, transparentHeader=false}:Template
       <Header />
       <main className=''>
         {children}
+        <CookieBar/>
       </main>
       <Footer/>
     </>
