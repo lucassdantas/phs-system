@@ -3,4 +3,5 @@ export interface ClassesType {
   date:Date;
   level:number;
   address:string;
+  vacancies:number;
 }

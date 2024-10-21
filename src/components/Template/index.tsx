@@ -12,7 +12,7 @@ export const Template = ({children, pageTitle, transparentHeader=false}:Template
   return (
     <>
       <Header />
-      <main className=''>
+      <main className='h-[70vh]'>
         {children}
         <CookieBar/>
       </main>
