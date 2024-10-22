@@ -1,10 +1,10 @@
-'use client'
 import { useState } from 'react';
 import { Limiter } from '@/components/Limiter';
 import { MobileMenu } from '@/components/Header/MobileMenu';
 import { useAuth } from '@/hooks/UseAuth';
 import logo from '@/assets/logo-phs-system-fonte-cinza.png'
 import { Link } from 'react-router-dom';
+
 export const Header = ({isHomepage=false}:{isHomepage?:boolean}) => {
   const { logout } = useAuth();
 
@@ -19,8 +19,7 @@ export const Header = ({isHomepage=false}:{isHomepage?:boolean}) => {
         <div className="flex flex-col md:flex-row items-center relative py-4">
           
           <div className="flex items-center justify-between md:w-1/3 w-full ">
-           <img src={logo} alt='logotipo Phs System' className='w-[155px]'/>
-        
+            <img src={logo} alt='logotipo Phs System' className='w-[155px]'/>
           </div>
 
           <div className="hidden w-2/3 md:flex flex-grow items-center md:justify-center justify-end font-bold">

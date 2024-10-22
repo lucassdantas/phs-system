@@ -37,10 +37,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const logout = () => {
+  const logout = (redirect=true) => {
     setUser(null);
     setToken(null);
-    navigate("/login", { replace: true });
+    if(redirect) navigate("/login", { replace: true });
   };
 
   const isAuthenticated = async () => {
@@ -63,8 +63,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const checkAuthentication = async () => {
       const valid = await isAuthenticated();
       if (!valid) {
-        logout(); // Chama o logout se o token não for válido
-        navigate("/login"); // Redireciona para a página de login
+        logout(false); // Chama o logout se o token não for válido
       }
     };
 
