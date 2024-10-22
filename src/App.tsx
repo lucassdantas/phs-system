@@ -2,12 +2,12 @@ import { Routes, Route } from "react-router-dom";
 import { Login } from "@/pages/Login";
 import { MyAccount } from "@/pages/MyAccount";
 import { Lessons } from "@/pages/Lessons";
-import "./App.css";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { AuthProvider } from "@/hooks/UseAuth";
 import { Policy } from "@/pages/Policy";
 import { Terms } from "@/pages/Terms";
 import { Admin } from "@/pages/Admin";
+import "./App.css";
 
 function App() {
   return (
