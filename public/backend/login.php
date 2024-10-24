@@ -1,21 +1,21 @@
 <?php
 require_once 'config/cors.php';
 require_once 'jwt_utils.php';
-
+require_once './controllers/UserController.php';
+require_once './config/developmentDb.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obter dados do corpo da solicitação (JSON)
     $data = json_decode(file_get_contents("php://input"));
-    $username = $data->username ?? '';
+    $email = $data->username ?? '';
     $password = $data->password ?? '';
-    // Credenciais fictícias
-    $validUsername = 'user';
-    $validPassword = 'password';
 
+    $db = new Database();
+    $UserController = new UserController($db);
     // Verificar se as credenciais são válidas
-    if ($username === $validUsername && $password === $validPassword) {
+    if ($UserController->login($email, $password)['loggedIn']) {
         // Gerar o token JWT
-        $jwt = JWTUtils::generateJWT($username);
+        $jwt = JWTUtils::generateJWT($email);
 
         // Retornar o token em formato JSON
         echo json_encode([
