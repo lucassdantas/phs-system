@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         password: data.password,
       });
       const { token, username } = response.data;
-
+      console.log(response)
       setToken(token);
       setUser({ username });
       navigate("/");

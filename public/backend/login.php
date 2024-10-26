@@ -12,10 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $db = new Database();
     $UserController = new UserController($db);
+    $loggedUser = $UserController->login($email, $password);
     // Verificar se as credenciais são válidas
-    if ($UserController->login($email, $password)['loggedIn']) {
+    if ($loggedUser['loggedIn']) {
         // Gerar o token JWT
-        $jwt = JWTUtils::generateJWT($email);
+        $jwt = JWTUtils::generateJWT($loggedUser['userData']);
 
         // Retornar o token em formato JSON
         echo json_encode([

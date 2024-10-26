@@ -14,12 +14,10 @@ class UserController {
     
     public function login($email, $password){
       $user = $this->userModel->getUserByEmail($email);
-      $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-      
-      if($user && $hashedPassword == $user['password']) return array('user'=>$user, 'loggedIn'=>true) ;
-      
+      if($user && password_verify($password, $user['password'])) return array('userData'=>$user, 'loggedIn'=>true) ;
       return array('user'=>false, 'loggedIn'=>false);
     }
+
     public function getUserById($id) {
         return $this->userModel->getUserById($id);
     }

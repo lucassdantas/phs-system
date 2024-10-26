@@ -8,15 +8,16 @@ class JWTUtils {
     private static $algorithm = 'HS256'; // Algoritmo de assinatura
 
     // Gerar token JWT
-    public static function generateJWT($username) {
+    public static function generateJWT($user) {
         $issuedAt = time();
         $expirationTime = $issuedAt + 3600; // Token válido por 1 hora
         $payload = [
             'iat' => $issuedAt,
             'exp' => $expirationTime,
-            'username' => $username,
+            'username' => $user['email'],
             'isJwtAuthenticated' => false,
-            'userRole' => 'member'
+            'userRole' => 'member',
+            'user' => $user
         ];
 
         return JWT::encode($payload, self::$secret_key, self::$algorithm);
