@@ -10,12 +10,12 @@ import { useEffect, useState } from 'react';
 export const Lessons = () => {
   const { user } = useAuth();
   const [lessons, setLessons] = useState<LessonsType[]>([]);
-  console.log(lessons)
   useEffect(() => {
     const fetchLessons = async () => {
       try {
         const lessonData = await getLessonById(user.phase_acquired_id, 'phase_id');
         setLessons(lessonData);
+        console.log(lessonData)
       } catch (error) {
         console.error('Erro ao obter aulas:', error);
       }

@@ -13,12 +13,9 @@ class LessonModel {
     }
 
     public function getLessonById($id, $identifierColumn = 'lesson_id') {
-        echo 'id!!!!!!!!!!'.$id; echo 'bbbbbbbbbbbbbb'.$identifierColumn; 
-
         $stmt = $this->db->prepare("SELECT * FROM lessons WHERE $identifierColumn = ?");
         $stmt->execute([$id]);
-        print_r($stmt);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
