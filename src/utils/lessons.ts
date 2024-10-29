@@ -1,6 +1,7 @@
-import { Lessons } from "@/types/lessons";
+import { LessonsType } from "@/types/lessons";
+import { getLessons } from "@/utils/api/lessons/get";
 
-export const lessons:Lessons[] = [
+export const lessons:LessonsType[] = getLessonsById()[
   {
     id:0,
     video:'link-do-video',

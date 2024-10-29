@@ -21,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Retornar o token em formato JSON
         echo json_encode([
             'success' => true,
-            'token' => $jwt
+            'token' => $jwt,
+            'userData' => $loggedUser['userData']
         ]);
     } else {
         // Resposta de erro para credenciais inválidas

@@ -13,8 +13,11 @@ class UserController {
     }
     
     public function login($email, $password){
-      $user = $this->userModel->getUserByEmail($email);
-      if($user && password_verify($password, $user['password'])) return array('userData'=>$user, 'loggedIn'=>true) ;
+      $userPassword = $this->userModel->getUserPasswordByEmail($email);
+      if($userPassword && password_verify($password, $userPassword['password'])) {
+        $user = $this->userModel->getUserByEmail($email);
+        return array('userData'=>$user, 'loggedIn'=>true);
+      }
       return array('user'=>false, 'loggedIn'=>false);
     }
 

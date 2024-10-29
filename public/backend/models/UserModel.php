@@ -3,20 +3,26 @@ class UserModel {
     private $db;
 
     public function __construct($db) {
-        $this->db = $db->getConnection();
+      $this->db = $db->getConnection();
     }
     
     public function getAllUsers() {
-        $stmt = $this->db->prepare("SELECT * FROM users");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $stmt = $this->db->prepare("SELECT user_id, first_name, last_name, email, phone, phase_acquired_id, address, city, state, zip_code, country, user_role, created_at FROM users");
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    public function getUserByEmail($email){
-      $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
+    public function getUserPasswordByEmail($email) {
+      $stmt = $this->db->prepare("SELECT password FROM users WHERE email = ?");
       $stmt->execute([$email]);
       return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getUserByEmail($email) {
+      $stmt = $this->db->prepare("SELECT user_id, first_name, last_name, email, phone, phase_acquired_id, address, city, state, zip_code, country, user_role, created_at FROM users WHERE email = ?");
+      $stmt->execute([$email]);
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getUserById($id) {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE user_id = ?");
         $stmt->execute([$id]);

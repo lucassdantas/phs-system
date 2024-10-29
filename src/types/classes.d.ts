@@ -4,4 +4,5 @@ export interface ClassesType {
   level:number;
   address:string;
   vacancies:number;
+  members:User[];
 }

@@ -2,12 +2,11 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "@/hooks/UseAuth";
 import { ReactNode } from "react";
 
-
-export const ProtectedRoute = ({ children }:{children:ReactNode}) => {
+export const ProtectedRoute = ({ children, userRole=['guest', 'member', 'instructor', 'admin'] }:{children:ReactNode, userRole?:string[]}) => {
   const { user } = useAuth();
-  if (!user) {
-    // user is not authenticated
-    return <Navigate to="/login" />;
-  }
+  let allowedUser = false
+  console.log(user)
+  if(user) userRole.forEach(role => {if(role === user.user_role) allowedUser = true })
+  if (!user || !allowedUser) return <Navigate to="/login" />;
   return children;
 };

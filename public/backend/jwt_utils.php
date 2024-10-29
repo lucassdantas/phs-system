@@ -14,10 +14,8 @@ class JWTUtils {
         $payload = [
             'iat' => $issuedAt,
             'exp' => $expirationTime,
-            'username' => $user['email'],
             'isJwtAuthenticated' => false,
-            'userRole' => 'member',
-            'user' => $user
+            'userData' => $user
         ];
 
         return JWT::encode($payload, self::$secret_key, self::$algorithm);

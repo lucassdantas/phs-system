@@ -26,10 +26,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         username: data.username,
         password: data.password,
       });
-      const { token, username } = response.data;
-      console.log(response)
+      const { token, userData } = response.data;
       setToken(token);
-      setUser({ username });
+      console.log(response)
+      setUser(userData);
       navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
@@ -50,7 +50,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const response = await axios.post(`${backendUrl}/verifyToken.php`, {
         token,
       });
-      console.log(response)
       return response.data.valid;
     } catch (error) {
       console.error("Token verification failed:", error);
