@@ -15,7 +15,6 @@ export const Lessons = () => {
       try {
         const lessonData = await getLessonById(user.phase_acquired_id, 'phase_id');
         setLessons(lessonData);
-        console.log(lessonData)
       } catch (error) {
         console.error('Erro ao obter aulas:', error);
       }
@@ -28,7 +27,7 @@ export const Lessons = () => {
     <Template pageTitle='Aulas'>
       <Hero pageTitle='Aulas' />
       <Section>
-        <div className='w-full flex justify-center items-center py-12'>
+        <div className='w-full flex justify-center items-center py-12 space-x-2'>
           {Array.isArray(lessons) && lessons.map((lesson: LessonsType, i: number) => (
             <LessonsCard lesson={lesson} key={i} />
           ))}
