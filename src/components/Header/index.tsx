@@ -14,25 +14,38 @@ export const Header = ({isHomepage=false}:{isHomepage?:boolean}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   return (
-    <header className="bg-white shadow-md">
+    <header className="bg-white shadow-md ">
       <Limiter className="py-2 lg:px-0 px-4">
-        <div className="flex flex-col md:flex-row items-center relative py-4">
-          
-          <div className="flex items-center justify-between md:w-1/3 w-full ">
-            <img src={logo} alt='logotipo Phs System' className='w-[155px]'/>
+        <div className='flex items-center justify-between p-4'>
+          <div className="flex items-center">
+          <img
+            src={logo} 
+            alt="PHS Logo"
+            className="h-10"
+          />
           </div>
 
-          <div className="hidden w-2/3 md:flex flex-grow items-center md:justify-center justify-end font-bold">
-            <ul className="flex gap-4 text-black">
-              <li><Link to='/'>Aulas</Link></li>
-              <li><Link to='/minha-conta'>Minha conta</Link></li>
-            </ul>
-          </div>
+          {/* Links de navegação */}
+          <nav className="flex space-x-8">
+            <Link to="/admin" className="text-gray-700 hover:text-light-blue-phs-system">
+              Área administrativa
+            </Link>
+            <Link to="/aulas" className="text-gray-700 hover:text-light-blue-phs-system">
+              Aulas
+            </Link>
+            <Link to="/login" className="text-gray-700 hover:text-light-blue-phs-system">
+              Login
+            </Link>
+          </nav>
 
-          <MobileMenu toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}/>
-
-          <div className="hidden lg:flex items-center w-full md:w-1/5 justify-center md:justify-end cursor-pointer"  onClick={() => handleLogout()}>
-            <span>Sair</span>
+          {/* Botões */}
+          <div className="flex space-x-4">
+            <button className="px-4 py-2 text-light-blue-phs-system border border-light-blue-phs-system rounded-full hover:bg-blue-100">
+              Login
+            </button>
+            <button className="px-4 py-2 text-white bg-dark-blue-phs-system rounded-full hover:bg-light-blue-phs-system">
+              Cadastrar-se
+            </button>
           </div>
         </div>
       </Limiter>

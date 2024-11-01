@@ -21,6 +21,14 @@ function App() {
             </ProtectedRoute>
           } 
         />
+        <Route 
+          path="/aulas" 
+          element={
+            <ProtectedRoute>
+              <Lessons/>
+            </ProtectedRoute>
+          } 
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/politica-de-privacidade" element={<Policy />} />
         <Route path="/termos-de-uso" element={<Terms />} />
