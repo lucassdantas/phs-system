@@ -15,7 +15,7 @@ export const Login = () => {
 
   return (
     <Template pageTitle="Login">
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex items-center justify-center py-12 bg-gray-100">
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
           <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
           <LoginForm onSubmit={handleLogin} />

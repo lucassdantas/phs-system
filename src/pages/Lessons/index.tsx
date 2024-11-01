@@ -25,7 +25,6 @@ export const Lessons = () => {
 
   return (
     <Template pageTitle='Aulas'>
-      <Hero pageTitle='Aulas' />
       <Section>
         <div className='w-full flex justify-center items-center py-12 space-x-2'>
           {Array.isArray(lessons) && lessons.map((lesson: LessonsType, i: number) => (

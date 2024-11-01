@@ -23,14 +23,14 @@ export const Header = ({ isHomepage = false }: { isHomepage?: boolean }) => {
       <Limiter className="py-2 lg:px-0 px-4">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center">
-            <img src={logo} alt="PHS Logo" className="h-10" />
+            <img src={logo} alt="PHS Logo" className="w-[112px] object-fit" />
           </div>
 
           <button onClick={toggleMenu} className="text-2xl text-gray-700 lg:hidden">
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
 
-          <NavMenu /> {/* Substituindo a navegação pelo componente NavMenu */}
+          <NavMenu />
 
           <div className="hidden lg:block">
             <LoginAndRegisterButtons />
