@@ -26,4 +26,3 @@ if (!empty($data->token)) {
 } else {
     echo json_encode(["valid" => false]);
 }
-?>

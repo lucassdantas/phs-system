@@ -1,12 +1,24 @@
 import { Button } from '@/components/Button'
 import { ColoredContainer } from '@/components/ColoredContainer'
 import { Section } from '@/components/Section'
+import { Table } from '@/components/Table'
 import { Template } from '@/components/Template'
+import { ClassesType } from '@/types/classes'
 import { UsersType } from '@/types/users'
-import { useState } from 'react'
+import { getClassesWithMembers } from '@/utils/api/classes/get'
+import { useEffect, useState } from 'react'
 
 export const Admin = () => {
   const [users, setUsers] = useState<UsersType | null>(null)
+  const [classes, setClasses] = useState<ClassesType[] | null>(null)
+  useEffect(() => {
+    const fetchClassesWithMembers = async() => {
+      const classesFromBackend = await getClassesWithMembers(10, 0)
+      console.log(classesFromBackend)
+      setClasses(classesFromBackend)
+    }
+    fetchClassesWithMembers()
+  },[])
   return (
     <Template pageTitle='Área administrativa'>
       <Section>
@@ -25,43 +37,35 @@ export const Admin = () => {
             </ColoredContainer>
             
             <ColoredContainer cardTitle={'Turmas'}>
-              <table className='w-full'>
-                <thead>
-                  <td>Data</td>
-                  <td>Endereço</td>
-                  <td>Vaga</td>
-                  <td>Detalhes</td>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>11/11/2024</td>
-                    <td>Novembro</td>
-                    <td>15</td>
-                    <td><Button/></td>
+              <Table className='w-full' titles={['Data', "Endereço", 'Vagas', 'Detalhes']}>
+                {classes && classes.length > 0 && classes.map((pupilClass, i) =>(
+                  <tr key={i}>
+                    <td>{new Date(pupilClass.class_date).toLocaleDateString('pt-BR')}</td>
+                    <td>{pupilClass.class_address}</td>
+                    <td>{pupilClass.class_vacancies}</td>
                   </tr>
-                </tbody>
-              </table>
+                ))}
+              </Table>
+            </ColoredContainer>
+
+            <ColoredContainer cardTitle={'Usuários'}>
+              <Table className='w-full' titles={['N°', 'Nome', 'Detalhes']}>
+                {classes && classes.length > 0 && classes.map((pupilClass, i) =>(
+                  <tr key={i}>
+                    <td>{new Date(pupilClass.class_date).toLocaleDateString('pt-BR')}</td>
+                    <td>{pupilClass.class_address}</td>
+                    <td>{pupilClass.class_vacancies}</td>
+                  </tr>
+                ))}
+              </Table>
             </ColoredContainer>
 
           </div>
           <div className='flex w-3/12'>
             <ColoredContainer cardTitle='Solicitações'>
-              <table className='w-full'>
-                <thead>
-                  <td>Data</td>
-                  <td>Endereço</td>
-                  <td>Vaga</td>
-                  <td>Detalhes</td>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>11/11/2024</td>
-                    <td>Novembro</td>
-                    <td>15</td>
-                    <td><Button/></td>
-                  </tr>
-                </tbody>
-              </table>
+              <Table className='w-full' titles={['Data', "Endereço", 'Vagas', 'Detalhes']}>
+                <tr></tr>
+              </Table>
             </ColoredContainer>
           </div>
         </div>
