@@ -11,7 +11,7 @@ export const Table = ({titles, children, className=''}:TableProps) => {
     <table className={'w-full overflow-x-scroll'+className}>
       <thead className=''>
         <tr className='flex justify-between items-center w-full mb-4 '>
-          {titles.map((title, i) => (<td key={i} className={`w-[${title.width}] text-medium-blue-phs-system font-medium`}>{title.name}</td>))}
+          {titles.map((title, i) => (<td key={i} className={`w-[${title.width}] text-medium-blue-phs-system font-semibold`}>{title.name}</td>))}
         </tr>
       </thead>
       <tbody className=''>

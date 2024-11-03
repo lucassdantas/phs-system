@@ -1,4 +1,5 @@
 import { Button } from '@/components/Button'
+import { Divider } from '@/components/Divider'
 import { LoadingSpinner } from '@/components/LoadingSpinner'
 import { Popup } from '@/components/Popup'
 import { Table } from '@/components/Table'
@@ -6,6 +7,7 @@ import { ClassesType } from '@/types/classes'
 import { getClasses, getClassesWithMembers } from '@/utils/api/classes/get'
 import { useEffect, useState } from 'react'
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa'
 import { RxDividerHorizontal } from 'react-icons/rx'
 
 export const ClassesTable = () => {
@@ -46,15 +48,16 @@ export const ClassesTable = () => {
     setIsLoading(true)
     fetchAllClasses(queryResultLimit, offSetQueryResults)
   },[currentPage])
+
   if(isLoading) return <LoadingSpinner/>
   return (
     <div>
       <div className='w-full flex justify-end items-center space-x-4'>
-        <BsArrowLeft className='cursor-pointer text-dark-green-phs-system font-black'  onClick={() => handlePageChange(currentPage-1)}/>
+        <FaLongArrowAltLeft  className='cursor-pointer text-medium-green-phs-system hover:text-medium-blue-phs-system' size={28} onClick={() => handlePageChange(currentPage-1)}/>
         <span>{currentPage}/{totalPages}</span>
-        <BsArrowRight className='cursor-pointer text-dark-green-phs-system font-black' onClick={() => handlePageChange(currentPage+1)}/>
+        <FaLongArrowAltRight className='cursor-pointer text-medium-green-phs-system hover:text-medium-blue-phs-system'  size={28}  onClick={() => handlePageChange(currentPage+1)}/>
       </div>
-      <RxDividerHorizontal accentHeight={1} width='100%' color='green'/>
+      <Divider className='mt-4 mb-8'/>
 
       <Table titles={[
         {name:'Data',     width:'20%'}, 
@@ -63,7 +66,7 @@ export const ClassesTable = () => {
         {name:'Detalhes', width:'20%'}
       ]}>
         {classes && classes.length > 0 && classes.map((pupilClass, i) =>(
-          <tr key={i} className={'flex justify-between py-4 border-t border-neutral-400 ' + (i==classes.length-1? 'border-b':'')}>
+          <tr key={i} className={'flex justify-between py-4 border-t border-neutral-300 text-neutral-700 ' + (i==classes.length-1? 'border-b':'')}>
             <td className='w-[20%]'>{new Date(pupilClass.class_date).toLocaleDateString('pt-BR')}</td>
             <td className='w-[50%]'>{pupilClass.class_address}</td>
             <td className='w-[10%]'>{pupilClass.class_vacancies}</td>
