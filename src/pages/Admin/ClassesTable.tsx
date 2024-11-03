@@ -49,9 +49,9 @@ export const ClassesTable = () => {
     fetchAllClasses(queryResultLimit, offSetQueryResults)
   },[currentPage])
 
-  if(isLoading) return <LoadingSpinner/>
+  //if(isLoading) return <LoadingSpinner/>
   return (
-    <div>
+    <div className='overflow-x-scroll'>
       <div className='w-full flex justify-end items-center space-x-4'>
         <FaLongArrowAltLeft  className='cursor-pointer text-medium-green-phs-system hover:text-medium-blue-phs-system' size={28} onClick={() => handlePageChange(currentPage-1)}/>
         <span>{currentPage}/{totalPages}</span>
@@ -66,11 +66,11 @@ export const ClassesTable = () => {
         {name:'Detalhes', width:'20%'}
       ]}>
         {classes && classes.length > 0 && classes.map((pupilClass, i) =>(
-          <tr key={i} className={'flex justify-between py-4 border-t border-neutral-300 text-neutral-700 ' + (i==classes.length-1? 'border-b':'')}>
-            <td className='w-[20%]'>{new Date(pupilClass.class_date).toLocaleDateString('pt-BR')}</td>
-            <td className='w-[50%]'>{pupilClass.class_address}</td>
-            <td className='w-[10%]'>{pupilClass.class_vacancies}</td>
-            <td className='w-[20%]'><Button onClick={() => setIsPopupOpen(true)}/></td>
+          <tr key={i} className={'flex justify-between py-4 border-t border-neutral-300 text-neutral-700 w-full' + (i==classes.length-1? 'border-b':'')}>
+            <td className='w-[20%] min-w-[120px]'>{new Date(pupilClass.class_date).toLocaleDateString('pt-BR')}</td>
+            <td className='w-[50%] min-w-[120px]'>{pupilClass.class_address}</td>
+            <td className='w-[10%] min-w-[120px]'>{pupilClass.class_vacancies}</td>
+            <td className='w-[20%] min-w-[120px]'><Button onClick={() => setIsPopupOpen(true)}/></td>
           </tr>
         ))}
         <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>

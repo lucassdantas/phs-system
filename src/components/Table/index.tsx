@@ -8,13 +8,13 @@ type TableProps = {
 
 export const Table = ({titles, children, className=''}:TableProps) => {
   return (
-    <table className={'w-full overflow-x-scroll'+className}>
-      <thead className=''>
-        <tr className='flex justify-between items-center w-full mb-4 '>
-          {titles.map((title, i) => (<td key={i} className={`w-[${title.width}] text-medium-blue-phs-system font-semibold`}>{title.name}</td>))}
+    <table className={'w-full '+className}>
+      <thead >
+        <tr className='flex justify-between items-center mb-4 w-full'>
+          {titles.map((title, i) => (<td key={i} className={`w-[${title.width}] min-w-[120px] text-medium-blue-phs-system font-semibold`}>{title.name}</td>))}
         </tr>
       </thead>
-      <tbody className=''>
+      <tbody className='w-full'>
         {children}
       </tbody>
     </table>
