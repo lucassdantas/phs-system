@@ -1,4 +1,5 @@
 import { Button } from '@/components/Button'
+import { LoadingSpinner } from '@/components/LoadingSpinner'
 import { Popup } from '@/components/Popup'
 import { Table } from '@/components/Table'
 import { ClassesType } from '@/types/classes'
@@ -14,7 +15,7 @@ export const ClassesTable = () => {
   const [offSetQueryResults, setOffSetQueryResults] = useState<number>(0)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [totalPages, setTotalPages] = useState<number>(currentPage)
-
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const handleTotalPages = (classQuantities:number) => {
     const pagesQuantity = (classQuantities/queryResultLimit)
     if(pagesQuantity % 2 != 0)  return setTotalPages(Math.trunc(pagesQuantity)+1)
@@ -29,19 +30,23 @@ export const ClassesTable = () => {
 
   const fetchAllClasses = async(limit:number, offset:number) => {
     const classesFromBackend = await getClasses(limit, offset)
-    console.log(classesFromBackend)
     setClasses(classesFromBackend.classes)
     handleTotalPages(classesFromBackend.classQuantity)
+    setIsLoading(false)
   }
 
   
   const handlePageChange = (pageNumber:number) => {
     if(pageNumber > totalPages || pageNumber < 1 ) return;
-    setOffSetQueryResults((currentPage-1)*queryResultLimit)
+    setOffSetQueryResults((pageNumber-1)*queryResultLimit)
     setCurrentPage(pageNumber)
   }
 
-  useEffect(() => {fetchAllClasses(queryResultLimit, offSetQueryResults)},[currentPage])
+  useEffect(() => {
+    setIsLoading(true)
+    fetchAllClasses(queryResultLimit, offSetQueryResults)
+  },[currentPage])
+  if(isLoading) return <LoadingSpinner/>
   return (
     <div>
       <div className='w-full flex justify-end items-center space-x-4'>
