@@ -7,7 +7,6 @@ export const ColoredContainer = ({cardTitle, children}:{cardTitle?:string,childr
       {cardTitle&&
         <div>
           <h4>{cardTitle}</h4>
-          <RxDividerHorizontal accentHeight={1} color='green'/>
         </div>
       }
       {children}

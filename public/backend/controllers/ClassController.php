@@ -15,7 +15,9 @@ class ClassController {
 
           switch ($action) {
               case 'getAllClasses':
-                  $classes = $this->getAllClasses();
+                  $limit  = intval($_GET['limit']);
+                  $offset = intval($_GET['offset']);
+                  $classes = $this->getAllClasses($limit, $offset);
                   echo json_encode($classes);
                   break;
 
@@ -58,12 +60,19 @@ class ClassController {
           echo json_encode(['error' => 'Nenhuma ação especificada']);
       }
   }
-    public function getAllClasses() {
-        return $this->classModel->getAllClasses();
+    public function getAllClasses($limit = 10, $offset = 0) {
+        return [
+          'classes' => $this->classModel->getAllClasses($limit, $offset),
+          'classQuantity' => $this->classModel->countClasses()['classes_quantity']
+        ];
     }
     
+    public function countClasses(){
+      return $classesWithMembersQuantity = $this->classModel->countClasses();
+    }
     public function getClassesWithMembers($limit = 10, $offset = 0){
       $classesWithMembers = $this->classModel->getClassesWithMembers($limit, $offset);
+      $classQuantities = $this->countClasses()['classes_quantity'];
       $organizedClassWithMembers = [];
       $i = 0;
       foreach ($classesWithMembers as $classWithMembers) {
@@ -86,10 +95,11 @@ class ClassController {
             "user_zip_code"  => $classWithMembers['zip_code'],
             "user_user_role" => $classWithMembers['user_role'],
             "user_joined_at"  => $classWithMembers['joined_at']
-          ]];
+          ],
+        ];
         $i++;
       }
-      return $organizedClassWithMembers;
+      return json_encode(['classesWithMembers' => $organizedClassWithMembers, 'classQuantities' => $classQuantities]);
     }
     public function getClassById($id) {
         return $this->classModel->getClassById($id);

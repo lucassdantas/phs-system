@@ -2,9 +2,9 @@ import { backendUrl } from '@/utils/constants/siteInfos';
 import axios from 'axios';
 import { ClassesType } from '@/types/classes';
 
-export const getClasses = async (): Promise<ClassesType[]> => {
+export const getClasses = async (limit=10, offset=0): Promise<ClassesType[]> => {
     try {
-        const response = await axios.get(`${backendUrl}/controllers/classController.php?action=getAllClasses`);
+        const response = await axios.get(`${backendUrl}/controllers/classController.php?action=getAllClasses&limit=${limit}&offset=${offset}`);
         return response.data;
     } catch (error) {
         console.error("Erro ao obter todas as turmas:", error);
@@ -21,10 +21,10 @@ export const getOrderById = async (id: number): Promise<ClassesType> => {
         throw error;
     }
 };
-export const getClassesWithMembers = async (limit=10, offset=0): Promise<ClassesType[]> => {
+export const getClassesWithMembers = async (limit=10, offset=0): Promise<ClassesType> => {
     try {
         const response = await axios.get(`${backendUrl}/controllers/classController.php?action=getClassesWithMembers&limit=${limit}&offset=${offset}`);
-        return response.data;
+        return JSON.parse(response.data);
     } catch (error) {
         console.error(`Erro ao obter as turmas com seus membros:`, error);
         throw error;

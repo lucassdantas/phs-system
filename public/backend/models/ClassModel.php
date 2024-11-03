@@ -6,8 +6,10 @@ class ClassModel {
         $this->db = $db->getConnection();
     }
 
-    public function getAllClasses() {
-        $stmt = $this->db->prepare("SELECT * FROM classes");
+    public function getAllClasses($limit, $offset) {
+        $stmt = $this->db->prepare("SELECT * FROM classes LIMIT :limit OFFSET :offset;");
+        $stmt->bindValue(':limit',  (int)$limit,  PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -48,6 +50,12 @@ class ClassModel {
       
       $stmt->execute();
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function countClasses(){
+      $stmt = $this->db->prepare("SELECT COUNT(class_id) AS classes_quantity FROM classes");
+      $stmt->execute();
+      return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function getClassById($id) {
         $stmt = $this->db->prepare("SELECT * FROM classes WHERE class_id = ?");

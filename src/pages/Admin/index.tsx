@@ -1,29 +1,13 @@
-import { Button } from '@/components/Button'
 import { ColoredContainer } from '@/components/ColoredContainer'
 import { Section } from '@/components/Section'
-import { Table } from '@/components/Table'
 import { Template } from '@/components/Template'
 import { ClassChangeRequests } from '@/pages/Admin/ClassChangeRequests'
 import { ClassesTable } from '@/pages/Admin/ClassesTable'
 import { InstructoresList } from '@/pages/Admin/InstructoresList'
 import { LessonsTable } from '@/pages/Admin/LessonsTable'
 import { UsersTable } from '@/pages/Admin/UsersTable'
-import { ClassesType } from '@/types/classes'
-import { UsersType } from '@/types/users'
-import { getClassesWithMembers } from '@/utils/api/classes/get'
-import { useEffect, useState } from 'react'
 
 export const Admin = () => {
-  const [users, setUsers] = useState<UsersType | null>(null)
-  const [classes, setClasses] = useState<ClassesType[] | null>(null)
-  useEffect(() => {
-    const fetchClassesWithMembers = async() => {
-      const classesFromBackend = await getClassesWithMembers(10, 0)
-      console.log(classesFromBackend)
-      setClasses(classesFromBackend)
-    }
-    fetchClassesWithMembers()
-  },[])
   return (
     <Template pageTitle='Área administrativa'>
       <Section className='py-12'>

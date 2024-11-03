@@ -9,10 +9,10 @@ type ButtonProps = {
   onClick?: () => void;
 }
 
-export const Button = ({content = 'Agendar consulta', target='_self', fontSize='base', ...buttonProps}:ButtonProps) => {
+export const Button = ({content = 'Visualizar', target='_self', fontSize='base', ...buttonProps}:ButtonProps) => {
   return (
-    <a  href='#' target={target} {...buttonProps} className="flex relative p-3  bg-green-500 rounded-xl  text-white font-bold items-center text-center justify-center gap-2 shadow-sm hover:bg-green-400 cursor-pointer transition duration-300 hover:scale-110">
-      <IoLogoWhatsapp className='text-xl'/> <span className={`text-${fontSize} uppercase`}>{content}</span>
+    <a target={target} {...buttonProps} className="py-2 px-4 bg-medium-green-phs-system rounded-full text-white text-center shadow-sm hover:bg-light-green-phs-system cursor-pointer transition duration-300 hover:scale-110">
+      <span className={`text-${fontSize}`}>{content}</span>
     </a>
   )
 }
