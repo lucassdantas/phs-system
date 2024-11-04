@@ -1,4 +1,5 @@
 export interface UsersType {
+  id:number;
   name:string;
   lastName:string;
   email:string;

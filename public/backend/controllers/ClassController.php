@@ -59,7 +59,7 @@ class ClassController {
       } else {
           echo json_encode(['error' => 'Nenhuma ação especificada']);
       }
-  }
+    }
     public function getAllClasses($limit = 10, $offset = 0) {
         return [
           'classes' => $this->classModel->getAllClasses($limit, $offset),

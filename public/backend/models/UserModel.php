@@ -5,9 +5,15 @@ class UserModel {
     public function __construct($db) {
       $this->db = $db->getConnection();
     }
-    
-    public function getAllUsers() {
-      $stmt = $this->db->prepare("SELECT user_id, first_name, last_name, email, phone, phase_acquired_id, address, city, state, zip_code, country, user_role, created_at FROM users");
+    public function countUsers(){
+      $stmt = $this->db->prepare("SELECT COUNT(user_id) AS users_quantity FROM users");
+      $stmt->execute();
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function getAllUsers($limit, $offset) {
+      $stmt = $this->db->prepare("SELECT user_id, first_name, last_name, email, phone, phase_acquired_id, address, city, state, zip_code, country, user_role, created_at FROM users LIMIT :limit OFFSET :offset;");
+      $stmt->bindValue(':limit',  (int)$limit,  PDO::PARAM_INT);
+      $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
       $stmt->execute();
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

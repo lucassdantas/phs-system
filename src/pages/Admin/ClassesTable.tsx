@@ -49,7 +49,7 @@ export const ClassesTable = () => {
     fetchAllClasses(queryResultLimit, offSetQueryResults)
   },[currentPage])
 
-  //if(isLoading) return <LoadingSpinner/>
+  if(isLoading) return <LoadingSpinner/>
   return (
     <div className='overflow-x-scroll'>
       <div className='w-full flex justify-end items-center space-x-4'>
@@ -57,6 +57,7 @@ export const ClassesTable = () => {
         <span>{currentPage}/{totalPages}</span>
         <FaLongArrowAltRight className='cursor-pointer text-medium-green-phs-system hover:text-medium-blue-phs-system'  size={28}  onClick={() => handlePageChange(currentPage+1)}/>
       </div>
+      
       <Divider className='mt-4 mb-8'/>
 
       <Table titles={[
