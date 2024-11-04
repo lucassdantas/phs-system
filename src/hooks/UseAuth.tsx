@@ -28,7 +28,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       });
       const { token, userData } = response.data;
       setToken(token);
-      console.log(response)
       setUser(userData);
       navigate("/");
     } catch (error) {

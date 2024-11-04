@@ -1,18 +1,27 @@
 <?php
 require_once 'config/cors.php';
-require_once 'jwt_utils.php';
-require_once './controllers/UserController.php';
-require_once './config/developmentDb.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_once 'jwt_utils.php';
+    require_once './config/developmentDb.php';
+    require_once 'models/UserModel.php';
+
     // Obter dados do corpo da solicitação (JSON)
     $data = json_decode(file_get_contents("php://input"));
     $email = $data->username ?? '';
     $password = $data->password ?? '';
+    function login($email, $password, $db){
+      $userModel = new UserModel($db);
+      $userPassword = $userModel->getUserPasswordByEmail($email);
+      if($userPassword && password_verify($password, $userPassword['password'])) {
+        $user = $userModel->getUserByEmail($email);
+        return array('userData'=>$user, 'loggedIn'=>true);
+      }
+      return array('user'=>false, 'loggedIn'=>false);
+    }
 
     $db = new Database();
-    $UserController = new UserController($db);
-    $loggedUser = $UserController->login($email, $password);
+    $loggedUser = login($email, $password, $db);
     // Verificar se as credenciais são válidas
     if ($loggedUser['loggedIn']) {
         // Gerar o token JWT
