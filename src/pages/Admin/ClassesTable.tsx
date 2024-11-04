@@ -20,7 +20,7 @@ export const ClassesTable = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const handleTotalPages = (classQuantities:number) => {
     const pagesQuantity = (classQuantities/queryResultLimit)
-    if(pagesQuantity % 2 != 0)  return setTotalPages(Math.trunc(pagesQuantity)+1)
+    if(pagesQuantity % 1 != 0 )  return setTotalPages(Math.trunc(pagesQuantity)+1)
     return setTotalPages(pagesQuantity)
   }
 

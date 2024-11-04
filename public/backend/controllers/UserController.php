@@ -60,15 +60,6 @@ class UserController {
       ];
     }
     
-    public function login($email, $password){
-      $userPassword = $this->userModel->getUserPasswordByEmail($email);
-      if($userPassword && password_verify($password, $userPassword['password'])) {
-        $user = $this->userModel->getUserByEmail($email);
-        return array('userData'=>$user, 'loggedIn'=>true);
-      }
-      return array('user'=>false, 'loggedIn'=>false);
-    }
-
     public function getUserById($id) {
         return $this->userModel->getUserById($id);
     }

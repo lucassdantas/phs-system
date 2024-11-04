@@ -17,9 +17,10 @@ export const UsersTable = () => {
   const [totalPages, setTotalPages] = useState<number>(currentPage)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  const handleTotalPages = (classQuantities:number) => {
-    const pagesQuantity = (classQuantities/queryResultLimit)
-    if(pagesQuantity % 2 != 0)  return setTotalPages(Math.trunc(pagesQuantity)+1)
+  const handleTotalPages = (usersQuantity:number) => {
+    const pagesQuantity = (usersQuantity/queryResultLimit)
+    console.log(pagesQuantity)
+    if(pagesQuantity % 1 != 0 )  return setTotalPages(Math.trunc(pagesQuantity)+1)
     return setTotalPages(pagesQuantity)
   }
 
