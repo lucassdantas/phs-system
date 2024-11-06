@@ -11,7 +11,7 @@ export const Admin = () => {
   return (
     <Template pageTitle='Área administrativa'>
       <Section className='py-12'>
-        <div className='w-full flex lg:flex-row flex-col-reverse justify-center items-center mb-12 space-x-12'>
+        <div className='w-full flex lg:flex-row flex-col-reverse justify-center items-start mb-12 space-x-12'>
           <div className='flex flex-col space-y-8 w-9/12'>
             
             <ColoredContainer>
@@ -35,7 +35,7 @@ export const Admin = () => {
 
           </div>
           
-          <div className='flex flex-col w-3/12 space-y-8'>
+          <div className='flex flex-col justify-start w-3/12 space-y-8'>
             <ColoredContainer cardTitle='Solicitações'>
               <ClassChangeRequests/>
             </ColoredContainer>

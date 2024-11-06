@@ -19,14 +19,12 @@ export const UsersTable = () => {
 
   const handleTotalPages = (usersQuantity:number) => {
     const pagesQuantity = (usersQuantity/queryResultLimit)
-    console.log(pagesQuantity)
     if(pagesQuantity % 1 != 0 )  return setTotalPages(Math.trunc(pagesQuantity)+1)
     return setTotalPages(pagesQuantity)
   }
 
   const fetchAllUsers = async(limit:number, offset:number) => {
     const usersFromBackend = await getUsers(limit, offset)
-    console.log(usersFromBackend)
     setUsers(usersFromBackend.users)
     handleTotalPages(usersFromBackend.usersQuantity)
     setIsLoading(false)
