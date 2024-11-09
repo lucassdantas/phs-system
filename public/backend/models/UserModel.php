@@ -17,6 +17,14 @@ class UserModel {
       $stmt->execute();
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getUsersByRole($role, $limit, $offset) {
+      $stmt = $this->db->prepare("SELECT user_id, first_name, last_name, email, phone, phase_acquired_id, address, city, state, zip_code, country, user_role, created_at FROM users WHERE user_role = :role LIMIT :limit OFFSET :offset;");
+      $stmt->bindValue(':limit',  (int)$limit,  PDO::PARAM_INT);
+      $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+      $stmt->bindValue(':role',   (string)$role, PDO::PARAM_STR);
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function getUserPasswordByEmail($email) {
       $stmt = $this->db->prepare("SELECT password FROM users WHERE email = ?");
       $stmt->execute([$email]);

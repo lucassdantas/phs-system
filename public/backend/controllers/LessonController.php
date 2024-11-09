@@ -26,6 +26,13 @@ class LessonController {
                     echo json_encode($lesson);
                     break;
 
+                case 'getLessonsWithUsers':
+                    $limit  = intval($_GET['limit']);
+                    $offset = intval($_GET['offset']);
+                    $classes = $this->getLessonsWithUsers($limit, $offset);
+                    echo json_encode($classes);
+                    break;
+
                 case 'createLesson':
                     $lessonData = json_decode(file_get_contents('php://input'), true);
                     $result = $this->createLesson($lessonData);
@@ -56,6 +63,40 @@ class LessonController {
 
     public function getAllLessons() {
         return $this->lessonModel->getAllLessons();
+    }
+
+    public function countLessons(){
+      return $classesWithMembersQuantity = $this->lessonModel->countLessons();
+    }
+    public function getLessonsWithUsers($limit = 10, $offset = 0){
+      $lessonsWithUsers = $this->lessonModel->getLessonsWithAuthorAndCreator($limit, $offset);
+      $lessonQuantities    = $this->countLessons()['lessons_quantity'];
+      $organizedLessonWithAuthors = [];
+      $i = 0;
+      foreach ($lessonsWithUsers as $lessonWithUsers) {
+        $organizedLessonWithAuthors[$i] = [
+          'lesson'=> [
+            'lesson_id'         => $lessonWithUsers['lesson_id'],
+            'lesson_class_id'   => $lessonWithUsers['class_id'],
+            'lesson_title'      => $lessonWithUsers['title'],
+            'lesson_created_at' => $lessonWithUsers['created_at'],
+            'lesson_updated_at' => $lessonWithUsers['updated_at'],
+            'reffered_phase'    => $lessonWithUsers['phase_name']
+          ],
+          'author' => [
+            'author_id'         => $lessonWithUsers['author_id'],
+            'author_first_name' => $lessonWithUsers['author_first_name'],
+            'author_last_name'  => $lessonWithUsers['author_last_name'],
+          ],
+          'instructor' => [
+            'instructor_id'         => $lessonWithUsers['instructor_id'],
+            'instructor_first_name' => $lessonWithUsers['instructor_first_name'],
+            'instructor_last_name'  => $lessonWithUsers['instructor_last_name'],
+          ],
+        ];
+        $i++;
+      }
+      return json_encode(['lessonWithAuthors' => $organizedLessonWithAuthors, 'lessonsQuantity' => $lessonQuantities]);
     }
 
     public function getLessonById() {

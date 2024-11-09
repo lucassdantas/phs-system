@@ -21,6 +21,14 @@ class UserController {
                   echo json_encode($users);
                   break;
 
+              case 'getUsersByRole':
+                  $limit  = intval($_GET['limit']);
+                  $offset = intval($_GET['offset']);
+                  $role = $_GET['userRole'];
+                  $users = $this->getUsersByRole($role, $limit, $offset);
+                  echo json_encode($users);
+                  break;
+
               case 'getUserById':
                   $user = $this->getUserById(intval($_GET['id']));
                   echo json_encode($user);
@@ -56,6 +64,13 @@ class UserController {
     public function getAllUsers($limit = 10, $offset = 0) {
       return [
         'users' => $this->userModel->getAllUsers($limit, $offset),
+        'usersQuantity' => $this->userModel->countUsers()['users_quantity']
+      ];
+    }
+    public function getUsersByRole($role, $limit = 10, $offset = 0) {
+      if (($role == 'admin') || ($role != 'guest' || $role != 'member' || $role != 'instructor')) $role = 'guest';
+      return [
+        'users' => $this->userModel->getUsersByRole($role, $limit, $offset),
         'usersQuantity' => $this->userModel->countUsers()['users_quantity']
       ];
     }
