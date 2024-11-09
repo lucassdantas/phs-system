@@ -23,4 +23,13 @@ export const getLessonById = async (id: number, columnIdentifier:string = 'lesso
     }
 };
 
+export const getLessonsWithMembers = async (limit=10, offset=0): Promise<LessonsType[]> => {
+  try {
+      const response = await axios.get(`${backendUrl}/controllers/LessonController.php?action=getLessonsWithUsers&limit=${limit}&offset=${offset}`);
+      return JSON.parse(response.data);
+  } catch (error) {
+      console.error(`Erro ao obter as aulas com seus membros:`, error);
+      throw error;
+  }
+};
 

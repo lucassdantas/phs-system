@@ -23,7 +23,6 @@ export const ClassChangeRequests = () => {
 
   const fetchClassesWithMembers = async(limit:number, offset:number) => {
     const classeChangeRequestsFromBackend = await getClassChangeRequestsWithMembers(limit, offset)
-    console.log(classeChangeRequestsFromBackend)
     setClassChangeRequests(classeChangeRequestsFromBackend.classChangeRequestsWithMembers)
     handleTotalPages(classeChangeRequestsFromBackend.class_change_requests_quantity)
     setIsLoading(false)
@@ -50,8 +49,8 @@ export const ClassChangeRequests = () => {
       </div>
       <Divider className='mt-4 mb-8'/>
       {classChangeRequests && classChangeRequests.length > 0 && classChangeRequests.map((changeRequest, i) =>(
-        <div key={i} className={'flex justify-between py-4  text-neutral-700 w-full' }>
-          <div className='w-1/3'><img className='rounded-full w-full object-fit' src={userImagesDirectory+changeRequest.user.user_image_url} alt='Imagem do usuário'/></div>
+        <div key={i} className={'flex justify-between py-4  text-neutral-700 w-full gap-4' }>
+          <div className='w-1/3'><img className='rounded-full w-full h-[70px] object-cover' src={userImagesDirectory+'default-image/placeholder-image.jpg'} alt='Imagem do usuário'/></div>
           <div className='w-2/3'>{changeRequest.user.user_first_name}<br/>solicitou troca de turma</div>
         </div>
       ))}

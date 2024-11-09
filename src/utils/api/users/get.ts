@@ -11,6 +11,15 @@ export const getUsers = async (limit=10, offset=0): Promise<UsersType[]> => {
         throw error;
     }
 };
+export const getUsersByRole = async (role:string, limit=10, offset=0): Promise<UsersType[]> => {
+    try {
+        const response = await axios.get(`${backendUrl}/controllers/userController.php?action=getUsersByRole&userRole=${role}&limit=${limit}&offset=${offset}`);
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao obter todos os usuários:", error);
+        throw error;
+    }
+};
 
 export const getUserById = async (id: number): Promise<UsersType> => {
     try {
