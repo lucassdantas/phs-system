@@ -24,14 +24,10 @@ export const Lessons = () => {
   }, [user.phase_acquired_id]);
 
   return (
-    <Template pageTitle='Aulas'>
-      <Section>
-        <div className='w-full flex justify-center items-center py-12 space-x-2'>
-          {Array.isArray(lessons) && lessons.map((lesson: LessonsType, i: number) => (
-            <LessonsCard lesson={lesson} key={i} />
-          ))}
-        </div>
-      </Section>
-    </Template>
+    <div className='w-full flex justify-center items-center py-12 space-x-2'>
+      {Array.isArray(lessons) && lessons.map((lesson: LessonsType, i: number) => (
+        <LessonsCard lesson={lesson} key={i} />
+      ))}
+    </div>
   );
 };

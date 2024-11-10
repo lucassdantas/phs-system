@@ -9,8 +9,8 @@ const NavMenu: React.FC = () => {
         Área administrativa
       </Link>
       <DropdownMenu /> 
-      <Link to="/login" className="text-gray-700 hover:text-light-blue-phs-system">
-        Login
+      <Link to="/minha-conta" className="text-gray-700 hover:text-light-blue-phs-system">
+        Minha conta
       </Link>
     </nav>
   );

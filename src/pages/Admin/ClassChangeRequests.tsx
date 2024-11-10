@@ -54,7 +54,7 @@ export const ClassChangeRequests = () => {
           <div className='w-2/3'>{changeRequest.user.user_first_name}<br/>solicitou troca de turma</div>
         </div>
       ))}
-      {classChangeRequests.length == 0 && <span>Nenhuma solicitação encontrada</span>}
+      {classChangeRequests && classChangeRequests.length == 0 && <span>Nenhuma solicitação encontrada</span>}
     </div>
   )
 }

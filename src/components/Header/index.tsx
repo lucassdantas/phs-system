@@ -46,8 +46,8 @@ export const Header = ({ isHomepage = false }: { isHomepage?: boolean }) => {
               <Link to="/aulas" className="text-gray-700 hover:text-light-blue-phs-system">
                 Aulas
               </Link>
-              <Link to="/login" className="text-gray-700 hover:text-light-blue-phs-system">
-                Login
+              <Link to="/minha-conta" className="text-gray-700 hover:text-light-blue-phs-system">
+                Minha conta
               </Link>
               <LoginAndRegisterButtons />
             </nav>
