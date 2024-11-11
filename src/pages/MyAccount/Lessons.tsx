@@ -18,10 +18,7 @@ export const Lessons = () => {
           {lssons.filter(lesson => lesson.phase === phase).map((lesson, index) => (
             <LessonsCard
               key={index}
-              phase={lesson.phase}
-              date={lesson.date}
-              title={lesson.title}
-              author={lesson.author}
+              lesson={lesson}
             />
           ))}
         </div>

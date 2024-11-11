@@ -1,4 +1,3 @@
-import { Hero } from '@/components/Hero';
 import { LessonsCard } from '@/components/LessonsCard';
 import { Section } from '@/components/Section';
 import { Template } from '@/components/Template';
@@ -15,19 +14,19 @@ export const Lessons = () => {
       try {
         const lessonData = await getLessonById(user.phase_acquired_id, 'phase_id');
         setLessons(lessonData);
-      } catch (error) {
-        console.error('Erro ao obter aulas:', error);
-      }
+      } catch (error) {console.error('Erro ao obter aulas:', error);}
     };
 
     fetchLessons();
   }, [user.phase_acquired_id]);
 
   return (
-    <div className='w-full flex justify-center items-center py-12 space-x-2'>
-      {Array.isArray(lessons) && lessons.map((lesson: LessonsType, i: number) => (
-        <LessonsCard lesson={lesson} key={i} />
-      ))}
-    </div>
+    <Template pageTitle='Aulas'>
+      <Section>
+        <div className='w-full flex lg:flex-row flex-col flex-wrap justify-start items-start py-12'>
+          {Array.isArray(lessons) && lessons.map((lesson: LessonsType, i: number) => <LessonsCard lesson={lesson} key={i} /> )}
+        </div>
+      </Section>
+    </Template>
   );
 };

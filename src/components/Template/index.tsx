@@ -1,14 +1,15 @@
-import React, { ReactNode } from 'react'
-import { Footer } from '@/components/Footer'
-import { Header } from '@/components/Header'
-import { CookieBar } from '@/components/CookieBar';
+import { ReactNode } from 'react'
 import { Hero } from '@/components/Hero';
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
+import { CookieBar } from '@/components/CookieBar';
 
 type TemplateProps = {
   children:ReactNode;
   pageTitle:string;
   hasBanner?:boolean;
 }
+
 export const Template = ({children, pageTitle, hasBanner = true}:TemplateProps) => {
   return (
     <>

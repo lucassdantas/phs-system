@@ -10,7 +10,6 @@ type AuthProviderProps = {
 
 type User = {
   username: string;
-  // Adicione mais campos aqui se necessário
 };
 
 const AuthContext = createContext<any>(null);
@@ -56,12 +55,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  // Verifica a autenticidade do token ao carregar a aplicação
   useEffect(() => {
     const checkAuthentication = async () => {
       const valid = await isAuthenticated();
       if (!valid) {
-        logout(false); // Chama o logout se o token não for válido
+        logout(false); 
       }
     };
 

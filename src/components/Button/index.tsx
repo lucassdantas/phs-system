@@ -1,4 +1,3 @@
-import { IoLogoWhatsapp } from "react-icons/io5";
 
 type ButtonProps = {
   content?:string; 
@@ -6,12 +5,14 @@ type ButtonProps = {
   target?:string;
   fontSize?:string;
   buttonProps?:any;
+  className?:string;
+  color?:string;
   onClick?: () => void;
 }
 
-export const Button = ({content = 'Visualizar', target='_self', fontSize='base', ...buttonProps}:ButtonProps) => {
+export const Button = ({content = 'Visualizar', target='_self', fontSize='base', className='', color='green', ...buttonProps}:ButtonProps) => {
   return (
-    <a target={target} {...buttonProps} className="py-2 px-4 bg-medium-green-phs-system rounded-full text-white text-center shadow-sm hover:bg-light-green-phs-system cursor-pointer transition duration-300 hover:scale-110">
+    <a target={target} {...buttonProps} className={`${className} ${color === 'green' ? 'bg-medium-green-phs-system hover:bg-medium-blue-phs-system':'bg-medium-blue-phs-system hover:bg-medium-green-phs-system '} py-2 px-4 rounded-full text-white text-center shadow-sm cursor-pointer transition duration-300 hover:scale-110 `}>
       <span className={`text-${fontSize}`}>{content}</span>
     </a>
   )
