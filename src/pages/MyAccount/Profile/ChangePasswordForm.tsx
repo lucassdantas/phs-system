@@ -28,8 +28,8 @@ export const ChangePasswordForm = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Digite seu usuário"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-light-blue-phs-system focus:border-transparent"
+            placeholder="Digite a nova senha"
           />
         </div>
         <div className="mb-6 w-1/2">
@@ -39,8 +39,8 @@ export const ChangePasswordForm = () => {
             type="password"
             value={password}
             onChange={(e) => setConfirmationPassword(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Digite sua senha"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-light-blue-phs-system focus:border-transparent"
+            placeholder="Repita a nova senha"
           />
         </div>
       </fieldset>

@@ -2,15 +2,15 @@ import { useAuth } from "@/hooks/UseAuth";
 import { Template } from '@/components/Template';
 import { Section } from '@/components/Section';
 import { ReactNode, useState } from "react";
-import { Lessons } from "@/pages//MyAccount/Lessons";
-import { Profile } from "@/pages/MyAccount/Profile";
-import { Address } from "@/pages/MyAccount/Address";
-import { Orders } from "@/pages/MyAccount/Orders";
 import { BiUser } from "react-icons/bi";
 import { TbUserSquare } from "react-icons/tb";
 import { IoBag } from "react-icons/io5";
 import { FaBookReader } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
+import { Lessons } from "@/pages/MyAccount/Lessons";
+import { Profile } from "@/pages/MyAccount/Profile";
+import { Address } from "@/pages/MyAccount/Address";
+import { Orders } from "@/pages/MyAccount/Orders";
 
 interface Tabs{
   icon:ReactNode;
