@@ -15,23 +15,11 @@ const DropdownMenu: React.FC = () => {
 
   return (
     <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
-      <button className="text-gray-700 hover:text-light-blue-phs-system flex items-center" >
-        Aulas <FaChevronDown className="ml-1 text-xs" /> 
-      </button>
+      <button className="text-gray-700 hover:text-light-blue-phs-system flex items-center" > <Link to='/aulas'>Aulas</Link> <FaChevronDown className="ml-1 text-xs" /> </button>
       {isOpen && (
         <div className="absolute z-20 py-2 w-48 bg-white shadow-lg rounded-md"   >
-          <Link to="/aulas/curso1" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">
-            Curso 1
-          </Link>
-          <Link to="/aulas/curso2" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">
-            Curso 2
-          </Link>
-          <Link to="/aulas/curso3" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">
-            Curso 3
-          </Link>
-          <Link to="/aulas/curso3" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">
-            Curso 3
-          </Link>
+          <Link to="/aulas/fase1" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">Fase 1</Link>
+          <Link to="/aulas/fase2" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">Fase 2</Link>
         </div>
       )}
     </div>

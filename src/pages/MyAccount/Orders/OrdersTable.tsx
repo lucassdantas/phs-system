@@ -1,5 +1,4 @@
 import { Button } from '@/components/Button'
-import { Divider } from '@/components/Divider'
 import { LoadingSpinner } from '@/components/LoadingSpinner'
 import { Popup } from '@/components/Popup'
 import { Table } from '@/components/Table'
