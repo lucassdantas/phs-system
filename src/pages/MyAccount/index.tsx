@@ -43,7 +43,8 @@ export const MyAccount = () => {
           ))}
         </div>
 
-        <div className="w-full flex justify-end">
+        <div className="w-full flex justify-between items-center">
+          <h2 className='font-bold text-2xl'>{activeTab}</h2>
           <button onClick={handleLogout} className={`flex justify-center gap-4 items-center py-2 px-6 text-lg  text-white rounded-full bg-medium-blue-phs-system hover:bg-red-700 cursor-pointer transition duration-300 hover:scale-110`}>
             <IoMdExit fontWeight={20} className='font-bold'/> Sair
           </button>

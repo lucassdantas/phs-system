@@ -1,6 +1,5 @@
 import { useAuth } from "@/hooks/UseAuth";
 import { LoginForm } from "./LoginForm";
-import { Template } from "@/components/Template";
 import { Section } from "@/components/Section";
 import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
