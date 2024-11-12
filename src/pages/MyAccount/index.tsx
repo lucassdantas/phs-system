@@ -2,7 +2,7 @@ import { useAuth } from "@/hooks/UseAuth";
 import { Template } from '@/components/Template';
 import { Section } from '@/components/Section';
 import { ReactNode, useState } from "react";
-import { Lessons } from "@/pages/Lessons";
+import { Lessons } from "@/pages//MyAccount/Lessons";
 import { Profile } from "@/pages/MyAccount/Profile";
 import { Address } from "@/pages/MyAccount/Address";
 import { Orders } from "@/pages/MyAccount/Orders";
@@ -42,13 +42,14 @@ export const MyAccount = () => {
             </button>
           ))}
         </div>
+
         <div className="w-full flex justify-end">
           <button onClick={handleLogout} className={`flex justify-center gap-4 items-center py-2 px-6 text-lg  text-white rounded-full bg-medium-blue-phs-system hover:bg-red-700 cursor-pointer transition duration-300 hover:scale-110`}>
             <IoMdExit fontWeight={20} className='font-bold'/> Sair
           </button>
         </div>
 
-        <div className="p-4">
+        <div className="p-4 border-t border-medium-green-phs-system mt-4">
           {activeTab === 'Meus cursos'  && <Lessons/> }
           {activeTab === 'Meu perfil'   && <Profile/> }
           {activeTab === 'Endereço'     && <Address/> }

@@ -14,9 +14,9 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='w-full'>
       <div className="mb-4">
-        <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="username" className="block text-sm font-medium text-white">
           Usuário:
         </label>
         <input
@@ -29,7 +29,7 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
         />
       </div>
       <div className="mb-6">
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="password" className="block text-sm font-medium text-white">
           Senha:
         </label>
         <input
@@ -41,11 +41,8 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
           placeholder="Digite sua senha"
         />
       </div>
-      <button
-        type="submit"
-        className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"
-      >
-        Login
+      <button type="submit" className="p-4 bg-medium-green-phs-system text-white py-2 rounded-full hover:bg-light-blue-phs-system transition-colors">
+        Entrar
       </button>
     </form>
   );
