@@ -13,7 +13,7 @@ export const Checkout = () => {
   const {user} = useAuth()
   return (
     <Template pageTitle='Checkout'>
-      <Section limiterClassname='space-y-4'>
+      <Section limiterClassname='space-y-4 py-4'>
         {user &&
           <div className="flex my-4">
             <ColoredContainer>
