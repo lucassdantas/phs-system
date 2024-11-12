@@ -5,11 +5,11 @@ import { userImagesDirectory } from "@/utils/constants/siteInfos"
 
   export const Profile = () => {
     return (
-    <div className="flex">
-     <div className='w-1/3'>
-      <img src={userImagesDirectory+'default-image/placeholder-image.jpg'} alt='Foto de perfil do usuário' className='rounded-full w-[150px] h-[150px] object-cover' />
+    <div className="flex gap-12">
+     <div className='w-2/6'>
+      <img src={userImagesDirectory+'default-image/placeholder-image.jpg'} alt='Foto de perfil do usuário' className='rounded-full w-full h-auto object-cover aspect-square' />
      </div>
-     <div className='w-2/3 space-y-5'>
+     <div className='w-5/6 space-y-5'>
       <ColoredContainer>
         <ChangeUserDataForm/>
       </ColoredContainer>
