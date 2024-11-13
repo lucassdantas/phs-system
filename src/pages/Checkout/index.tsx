@@ -1,3 +1,4 @@
+import { Button } from '@/components/Button'
 import { ColoredContainer } from '@/components/ColoredContainer'
 import { Divider } from '@/components/Divider'
 import { Section } from '@/components/Section'
@@ -23,8 +24,15 @@ export const Checkout = () => {
         }
         <div className="flex">
           <ColoredContainer className='bg-light-green-phs-system'>
-            <h3 className='font-bold text-xl'>Tem um cupom? Clique aqui para inserir seu código.</h3>
-            <CouponForm/>
+            <div className='flex flex-col items-tart justify-start gap-4 w-1/2'>
+              <h3 className='font-bold text-xl'>Tem um cupom? Clique aqui para inserir seu código.</h3>
+              <input 
+                id='coupon'
+                placeholder='Insira o código'
+                className='w-full px-3 py-2 border border-gray-300 rounded-lg mt-1 focus:outline-none focus:ring-2 focus:ring-light-blue-phs-system focus:border-transparent'
+              />
+              <Button content='Aplicar cupom' color='blue' className='w-fit'/>
+            </div>
           </ColoredContainer>
         </div>
         <div className="flex gap-6">

@@ -73,8 +73,8 @@ export const BillingForm = () => {
     <form onSubmit={handleSubmit} className='w-full my-4'>
       <div className=' flex flex-wrap gap-x-4 gap-y-2 mb-4'>
         {fields.map((field, index) => (
-          <div className="w-[48%]">
-            <label htmlFor={field.id} className="block text-sm">{field.label}</label>
+          <div className="w-[48%]" key={index}>
+            <label htmlFor={field.id}>{field.label}</label>
             <input
               id={field.id}
               type={field.type}
