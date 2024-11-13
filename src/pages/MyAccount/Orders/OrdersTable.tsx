@@ -23,7 +23,6 @@ export const OrdersTable = () => {
   }
   const fetchOrders = async(limit:number, offset:number) => {
     const ordersFromBackEnd = await getOrders(limit, offset)
-    console.log(ordersFromBackEnd)
     setOrders(ordersFromBackEnd.ordersData)
     handleTotalPages(ordersFromBackEnd.ordersQuantity)
     setIsLoading(false)
@@ -39,6 +38,7 @@ export const OrdersTable = () => {
     setIsLoading(true)
     fetchOrders(queryResultLimit, offSetQueryResults)
   },[currentPage])
+  console.log(orders)
 
   if(isLoading) return <LoadingSpinner/>
   return (
@@ -60,10 +60,10 @@ export const OrdersTable = () => {
       ]}>
         {orders && orders.length > 0 && orders.map((ordersData, i) =>(
           <tr key={i} className={'flex justify-between py-4 border-t border-neutral-300 text-neutral-700 w-full' + (i==orders.length-1? 'border-b':'')}>
-            <td className='w-[20%] min-w-[120px]'>{ordersData.lesson.reffered_phase}</td>
-            <td className='w-[20%] min-w-[120px]'>{ordersData.lesson.lesson_title}</td>
-            <td className='w-[20%] min-w-[120px]'>{new Date(ordersData.lesson.lesson_created_at).toLocaleDateString('pt-BR')}</td>
-            <td className='w-[20%] min-w-[120px]'>{ordersData.author.author_first_name} {ordersData.author.author_last_name}</td>
+            <td className='w-[20%] min-w-[120px]'>{ordersData.order_id}</td>
+            <td className='w-[20%] min-w-[120px]'>{new Date(ordersData.order_date).toLocaleDateString('pt-BR')}</td>
+            <td className='w-[20%] min-w-[120px]'>{ordersData.payment_status}</td>
+            <td className='w-[20%] min-w-[120px]'>{ordersData.total_amount}</td>
             <td className='w-[20%] min-w-[120px]'><Button content='Visualizar' onClick={() => setIsPopupOpen(true)}/></td>
           </tr>
         ))}

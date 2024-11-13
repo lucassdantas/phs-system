@@ -7,7 +7,7 @@ class OrderModel {
     }
 
     public function getAllOrders($limit, $offset) {
-        $stmt = $this->db->prepare("SELECT * FROM orders LIMIT:limit OFFSET:offset");
+        $stmt = $this->db->prepare("SELECT * FROM orders LIMIT :limit OFFSET :offset;");
         $stmt->bindValue(':limit',  (int)$limit,  PDO::PARAM_INT);
         $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
         $stmt->execute();
@@ -20,7 +20,7 @@ class OrderModel {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function countOrders(){
-      $stmt = $this->db->prepare('SELECT COUNT(order_id) AS orders_quantity FROM lessons');
+      $stmt = $this->db->prepare('SELECT COUNT(order_id) AS orders_quantity FROM orders');
       $stmt->execute();
       return $stmt->fetch(PDO::FETCH_ASSOC);
     }

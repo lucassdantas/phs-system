@@ -7,7 +7,7 @@ class OrderController {
     private $orderModel;
 
     public function __construct($db) {
-        $this->orderModel = new OrderModel($db);
+      $this->orderModel = new OrderModel($db);
     }
 
     public function handleRequest() {
@@ -19,8 +19,6 @@ class OrderController {
                 $limit  = intval($_GET['limit']);
                 $offset = intval($_GET['offset']);
                 $orders = $this->getAllOrders($limit, $offset);
-                print_r('aaaaaaaa');
-                print_r($orders);
                 echo json_encode($orders);
                 break;
 
@@ -36,7 +34,7 @@ class OrderController {
     public function getAllOrders($limit=10, $offset=0) {
       $orders = $this->orderModel->getAllOrders($limit , $offset);
       $ordersQuantity = $this->orderModel->countOrders();
-      return Array('productData'=>$orders, 'ordersQuantity'=>$ordersQuantity);
+      return Array('ordersData'=>$orders, 'ordersQuantity'=>$ordersQuantity);
     }
 
     public function getOrderById($id) {
@@ -55,3 +53,6 @@ class OrderController {
         return $this->orderModel->deleteOrder($id);
     }
 }
+$dbConnection = new Database();
+$controller = new OrderController($dbConnection);
+$controller->handleRequest();
