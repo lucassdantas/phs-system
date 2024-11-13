@@ -35,6 +35,7 @@ export const Checkout = () => {
             </div>
           </ColoredContainer>
         </div>
+        
         <div className="flex gap-6">
           <div className="flex flex-col lg:w-1/2 w-full">
             <ColoredContainer>
@@ -46,7 +47,6 @@ export const Checkout = () => {
           <div className="flex flex-col gap-4 lg:w-1/2 w-full">
             <ColoredContainer>
               <h3 className='font-bold text-xl'>Seu pedido</h3>
-
               <ProductsTable/>
             </ColoredContainer>
 

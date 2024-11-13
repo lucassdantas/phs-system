@@ -3,7 +3,7 @@ class ProductModel {
     private $db;
 
     public function __construct($db) {
-        $this->db = $db;
+        $this->db = $db->getConnection();
     }
 
     public function getAllProducts() {

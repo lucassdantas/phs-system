@@ -12,9 +12,9 @@ export const getProducts = async (): Promise<ProductsType[]> => {
     }
 };
 
-export const getProductById = async (id: number): Promise<ProductsType> => {
+export const getProductById = async (id: number): Promise<ProductsType[]> => {
     try {
-        const response = await axios.get(`${backendUrl}/controllers/productController.php?action=getProductById&id=${id}`);
+        const response = await axios.get(`${backendUrl}/controllers/ProductController.php?action=getProductById&id=${id}`);
         return response.data;
     } catch (error) {
         console.error(`Erro ao obter o produto com ID ${id}:`, error);

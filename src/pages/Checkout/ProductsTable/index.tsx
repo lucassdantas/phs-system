@@ -2,27 +2,32 @@ import { Divider } from '@/components/Divider'
 import { LoadingSpinner } from '@/components/LoadingSpinner'
 import { Table } from '@/components/Table'
 import { LessonsType } from '@/types/lessons'
-import { getLessonsWithMembers } from '@/utils/api/lessons/get'
+import { ProductsType } from '@/types/products'
+import { getProductById } from '@/utils/api/products/get'
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 export const ProductsTable = () => {
-  const [lessons, setLessons] = useState<LessonsType[] | null>(null)
-  const [queryResultLimit, setQueryResultLimit] = useState<number>(2)
-  const [offSetQueryResults, setOffSetQueryResults] = useState<number>(0)
+  const [product, setProduct] = useState<ProductsType[] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [searchParams] = useSearchParams()
 
-  const fetchLessonsWithAuthor = async(limit:number, offset:number) => {
-    const lessonsFromBackEnd = await getLessonsWithMembers(limit, offset)
-    console.log(lessonsFromBackEnd)
-    setLessons(lessonsFromBackEnd.lessonWithAuthors)
+  const fetchProducts = async(id:number) => {
+    const productsFromBackEnd = await getProductById(id)
+    setProduct(productsFromBackEnd)
     setIsLoading(false)
   }
-  
 
-  useEffect(() => {
-    setIsLoading(true)
-    fetchLessonsWithAuthor(queryResultLimit, offSetQueryResults)
-  },[])
+useEffect(() => {
+  setIsLoading(true);
+  const productId = searchParams.get('productId');
+  if (productId !== null) {
+    fetchProducts(Number(productId));
+  } else {
+    // Lidar com o caso em que productId é null, se necessário
+    console.warn('Product ID is null');
+  }
+}, []);
 
   if(isLoading) return <LoadingSpinner/>
   return (
@@ -33,12 +38,12 @@ export const ProductsTable = () => {
         {name:'Produto', width:'70%'}, 
         {name:"Total",   width:'30%'},
       ]}>
-        {lessons && lessons.length > 0 && lessons.map((lessonData, i) =>(
-          <tr key={i} className={'flex justify-between py-4 border-t border-neutral-300 text-neutral-700 w-full' + (i==lessons.length-1? 'border-b':'')}>
-            <td className='w-[70%] min-w-[120px]'>{new Date(lessonData.lesson.lesson_updated_at).toLocaleDateString('pt-BR')}</td>
-            <td className='w-[30%] min-w-[120px]'>{lessonData.author.author_first_name} {lessonData.author.author_last_name}</td>
+        {product && product.length > 0 && product.map((productData, i) => {console.log(productData); return(
+          <tr key={i} className={'flex justify-between py-4 border-t border-neutral-300 text-neutral-700 w-full' + (i==product.length-1? 'border-b':'')}>
+            <td className='w-[70%] min-w-[120px]'>{productData.name}</td>
+            <td className='w-[30%] min-w-[120px]'>{productData.price}</td>
           </tr>
-        ))}
+        )})}
         <tr className={'flex justify-between py-4 border-t border-neutral-300 text-neutral-700 w-full' }>
           <td className='w-[70%] min-w-[120px] font-bold text-medium-blue-phs-system'>{'Total'}</td>
           <td className='w-[30%] min-w-[120px] font-bold text-black'>{'R$ 3000,00'}</td>
