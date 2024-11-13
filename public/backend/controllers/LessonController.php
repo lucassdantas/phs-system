@@ -70,7 +70,7 @@ class LessonController {
     }
     public function getLessonsWithUsers($limit = 10, $offset = 0){
       $lessonsWithUsers = $this->lessonModel->getLessonsWithAuthorAndCreator($limit, $offset);
-      $lessonQuantities    = $this->countLessons()['lessons_quantity'];
+      $lessonQuantities = $this->countLessons()['lessons_quantity'];
       $organizedLessonWithAuthors = [];
       $i = 0;
       foreach ($lessonsWithUsers as $lessonWithUsers) {

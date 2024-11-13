@@ -2,13 +2,13 @@ import { Button } from '@/components/Button'
 import { LoadingSpinner } from '@/components/LoadingSpinner'
 import { Popup } from '@/components/Popup'
 import { Table } from '@/components/Table'
-import { LessonsType } from '@/types/lessons'
-import { getLessonsWithMembers } from '@/utils/api/lessons/get'
+import { OrdersType } from '@/types/orders'
+import { getOrders } from '@/utils/api/orders/get'
 import { useEffect, useState } from 'react'
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa'
 
 export const OrdersTable = () => {
-  const [lessons, setLessons] = useState<LessonsType[] | null>(null)
+  const [orders, setOrders] = useState<OrdersType[] | null>(null)
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false)
   const [queryResultLimit, setQueryResultLimit] = useState<number>(5)
   const [offSetQueryResults, setOffSetQueryResults] = useState<number>(0)
@@ -21,11 +21,11 @@ export const OrdersTable = () => {
     if(pagesQuantity % 1 != 0 )  return setTotalPages(Math.trunc(pagesQuantity)+1)
     return setTotalPages(pagesQuantity)
   }
-  const fetchLessonsWithAuthor = async(limit:number, offset:number) => {
-    const lessonsFromBackEnd = await getLessonsWithMembers(limit, offset)
-    console.log(lessonsFromBackEnd)
-    setLessons(lessonsFromBackEnd.lessonWithAuthors)
-    handleTotalPages(lessonsFromBackEnd.lessonsQuantity)
+  const fetchOrders = async(limit:number, offset:number) => {
+    const ordersFromBackEnd = await getOrders(limit, offset)
+    console.log(ordersFromBackEnd)
+    setOrders(ordersFromBackEnd.ordersData)
+    handleTotalPages(ordersFromBackEnd.ordersQuantity)
     setIsLoading(false)
   }
   
@@ -37,7 +37,7 @@ export const OrdersTable = () => {
 
   useEffect(() => {
     setIsLoading(true)
-    fetchLessonsWithAuthor(queryResultLimit, offSetQueryResults)
+    fetchOrders(queryResultLimit, offSetQueryResults)
   },[currentPage])
 
   if(isLoading) return <LoadingSpinner/>
@@ -58,17 +58,17 @@ export const OrdersTable = () => {
         {name:'Total',  width:'20%'},
         {name:'Detalhes', width:'20%'},
       ]}>
-        {lessons && lessons.length > 0 && lessons.map((lessonData, i) =>(
-          <tr key={i} className={'flex justify-between py-4 border-t border-neutral-300 text-neutral-700 w-full' + (i==lessons.length-1? 'border-b':'')}>
-            <td className='w-[20%] min-w-[120px]'>{lessonData.lesson.reffered_phase}</td>
-            <td className='w-[20%] min-w-[120px]'>{lessonData.lesson.lesson_title}</td>
-            <td className='w-[20%] min-w-[120px]'>{new Date(lessonData.lesson.lesson_created_at).toLocaleDateString('pt-BR')}</td>
-            <td className='w-[20%] min-w-[120px]'>{lessonData.author.author_first_name} {lessonData.author.author_last_name}</td>
+        {orders && orders.length > 0 && orders.map((ordersData, i) =>(
+          <tr key={i} className={'flex justify-between py-4 border-t border-neutral-300 text-neutral-700 w-full' + (i==orders.length-1? 'border-b':'')}>
+            <td className='w-[20%] min-w-[120px]'>{ordersData.lesson.reffered_phase}</td>
+            <td className='w-[20%] min-w-[120px]'>{ordersData.lesson.lesson_title}</td>
+            <td className='w-[20%] min-w-[120px]'>{new Date(ordersData.lesson.lesson_created_at).toLocaleDateString('pt-BR')}</td>
+            <td className='w-[20%] min-w-[120px]'>{ordersData.author.author_first_name} {ordersData.author.author_last_name}</td>
             <td className='w-[20%] min-w-[120px]'><Button content='Visualizar' onClick={() => setIsPopupOpen(true)}/></td>
           </tr>
         ))}
         <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
-          <h2>Aula</h2>
+          <h2>Pedido</h2>
         </Popup>
       </Table>
     </div>
