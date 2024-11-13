@@ -33,7 +33,7 @@ class OrderController {
 
     public function getAllOrders($limit=10, $offset=0) {
       $orders = $this->orderModel->getAllOrders($limit , $offset);
-      $ordersQuantity = $this->orderModel->countOrders();
+      $ordersQuantity = $this->orderModel->countOrders()['orders_quantity'];
       return Array('ordersData'=>$orders, 'ordersQuantity'=>$ordersQuantity);
     }
 
