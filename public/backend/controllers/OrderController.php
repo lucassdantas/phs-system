@@ -19,6 +19,8 @@ class OrderController {
                 $limit  = intval($_GET['limit']);
                 $offset = intval($_GET['offset']);
                 $orders = $this->getAllOrders($limit, $offset);
+                print_r('aaaaaaaa');
+                print_r($orders);
                 echo json_encode($orders);
                 break;
 
@@ -31,8 +33,8 @@ class OrderController {
       }
     }
 
-    public function getAllOrders($limit, $offset) {
-      $orders = $this->orderModel->getAllOrders($limit = 10, $offset = 0);
+    public function getAllOrders($limit=10, $offset=0) {
+      $orders = $this->orderModel->getAllOrders($limit , $offset);
       $ordersQuantity = $this->orderModel->countOrders();
       return Array('productData'=>$orders, 'ordersQuantity'=>$ordersQuantity);
     }
