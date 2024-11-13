@@ -36,14 +36,14 @@ export const Checkout = () => {
           </ColoredContainer>
         </div>
         <div className="flex gap-6">
-          <div className="flex flex-col w-1/2">
+          <div className="flex flex-col lg:w-1/2 w-full">
             <ColoredContainer>
               <h3 className='font-bold text-xl'>Detalhes do faturamento</h3>
               <Divider className='mt-4 mb-8'/>
               <BillingForm/>
             </ColoredContainer>
           </div>
-          <div className="flex flex-col gap-4 w-1/2">
+          <div className="flex flex-col gap-4 lg:w-1/2 w-full">
             <ColoredContainer>
               <h3 className='font-bold text-xl'>Seu pedido</h3>
 
