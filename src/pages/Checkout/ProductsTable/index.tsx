@@ -1,7 +1,6 @@
 import { Divider } from '@/components/Divider'
 import { LoadingSpinner } from '@/components/LoadingSpinner'
 import { Table } from '@/components/Table'
-import { LessonsType } from '@/types/lessons'
 import { ProductsType } from '@/types/products'
 import { getProductById } from '@/utils/api/products/get'
 import { useEffect, useState } from 'react'
@@ -29,7 +28,6 @@ export const ProductsTable = () => {
   return (
     <div className='overflow-x-scroll'>
       <Divider className='mt-4 mb-8'/>
-
       <Table titles={[
         {name:'Produto', width:'70%'}, 
         {name:"Total",   width:'30%'},
@@ -46,7 +44,6 @@ export const ProductsTable = () => {
             </tr>
           </>
         ))}
-        
       </Table>
     </div>
   )

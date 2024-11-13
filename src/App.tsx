@@ -8,6 +8,7 @@ import { Policy } from "@/pages/Policy";
 import { Terms } from "@/pages/Terms";
 import { Admin } from "@/pages/Admin";
 import { Checkout } from "@/pages/Checkout";
+import { StorePolicies } from "@/pages/StorePolicies";
 import "./App.css";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         />
         <Route path="/login"    element={<Login />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/politicas-da-loja" element={<StorePolicies />} />
         <Route path="/politica-de-privacidade" element={<Policy />} />
         <Route path="/termos-de-uso" element={<Terms />} />
         <Route
