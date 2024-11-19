@@ -30,7 +30,9 @@ export const Header = ({ isHomepage = false }: { isHomepage?: boolean }) => {
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
 
-          <NavMenu />
+          <div className="hidden lg:flex">
+            <NavMenu />
+          </div>
 
           <div className="hidden lg:block">
             <LoginAndRegisterButtons />
@@ -39,7 +41,8 @@ export const Header = ({ isHomepage = false }: { isHomepage?: boolean }) => {
 
         {isMenuOpen && (
           <MobileMenu onClose={toggleMenu}>
-            <nav className="flex flex-col items-center space-y-4 py-4">
+            <NavMenu/>
+            {/* <nav className="flex flex-col items-center space-y-4 py-4">
               <Link to="/admin" className="text-gray-700 hover:text-light-blue-phs-system">
                 Área administrativa
               </Link>
@@ -50,7 +53,7 @@ export const Header = ({ isHomepage = false }: { isHomepage?: boolean }) => {
                 Minha conta
               </Link>
               <LoginAndRegisterButtons />
-            </nav>
+            </nav> */}
           </MobileMenu>
         )}
       </Limiter>
