@@ -5,9 +5,7 @@ export const LoginAndRegisterButtons = () => {
   const { user, logout } = useAuth();
 
   if(user) return(
-    <div onClick={() => logout()} className='cursor-pointer'>
-      <span>Sair</span>
-    </div>
+    <span onClick={() => logout()} className='cursor-pointer'>Sair</span>
   )
   return (
     <div className="flex lg:flex-row flex-col items-center lg:space-x-4 lg:space-y-0 space-y-4">

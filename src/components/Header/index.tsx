@@ -6,15 +6,10 @@ import logo from '@/assets/logo-phs-system-fonte-cinza.png';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { LoginAndRegisterButtons } from '@/components/Header/MyAccountButton';
 import NavMenu from './NavMenu'; // Importar o NavMenu
-import { Link } from 'react-router-dom';
+import { IoMdExit } from 'react-icons/io';
 
 export const Header = ({ isHomepage = false }: { isHomepage?: boolean }) => {
-  const { logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleLogout = () => {
-    logout();
-  };
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -42,6 +37,10 @@ export const Header = ({ isHomepage = false }: { isHomepage?: boolean }) => {
         {isMenuOpen && (
           <MobileMenu onClose={toggleMenu}>
             <NavMenu/>
+            <div className="flex items-center gap-2">
+              <LoginAndRegisterButtons />
+              <IoMdExit/>
+            </div>
           </MobileMenu>
         )}
       </Limiter>
