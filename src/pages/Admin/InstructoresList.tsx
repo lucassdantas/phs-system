@@ -52,7 +52,7 @@ export const InstructoresList = () => {
       <div className='flex flex-wrap'>
         {users && users.length > 0 && users.map((user, i) =>(
           <div key={i} className={'flex flex-col w-1/2 items-center py-4  text-neutral-700' }>
-            <div><img  className='rounded-full w-full h-[110px] object-cover' src={userImagesDirectory+'default-image/placeholder-image.jpg'} alt='Imagem do usuário'/></div>
+            <div><img  className='rounded-full w-full aspect-square object-cover' src={userImagesDirectory+'default-image/placeholder-image.jpg'} alt='Imagem do usuário'/></div>
             <div><span className='font-bold'>{user.first_name}</span></div>
             <div><span className='cursor-pointer'>Editar</span></div>
           </div>

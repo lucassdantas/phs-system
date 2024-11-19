@@ -50,7 +50,7 @@ export const ClassChangeRequests = () => {
       <Divider className='mt-4 mb-8'/>
       {classChangeRequests && classChangeRequests.length > 0 && classChangeRequests.map((changeRequest, i) =>(
         <div key={i} className={'flex justify-between py-4  text-neutral-700 w-full gap-4' }>
-          <div className='w-1/3'><img className='rounded-full w-full h-[70px] object-cover' src={userImagesDirectory+'default-image/placeholder-image.jpg'} alt='Imagem do usuário'/></div>
+          <div className='w-1/3'><img className='rounded-full w-full aspect-square object-cover' src={userImagesDirectory+'default-image/placeholder-image.jpg'} alt='Imagem do usuário'/></div>
           <div className='w-2/3'>{changeRequest.user.user_first_name}<br/>solicitou troca de turma</div>
         </div>
       ))}

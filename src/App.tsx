@@ -12,6 +12,7 @@ import { StorePolicies } from "@/pages/StorePolicies";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import { AddLesson } from "@/pages/Admin/AddEntity/AddLesson";
 
 function App() {
   return (
@@ -48,11 +49,20 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/admin"
           element={
             <ProtectedRoute userRole={['admin']}>
               <Admin />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/add-lesson"
+          element={
+            <ProtectedRoute userRole={['admin']}>
+              <AddLesson />
             </ProtectedRoute>
           }
         />
