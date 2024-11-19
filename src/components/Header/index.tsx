@@ -30,7 +30,7 @@ export const Header = ({ isHomepage = false }: { isHomepage?: boolean }) => {
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
 
-          <div className="hidden lg:flex">
+          <div className="hidden lg:block">
             <NavMenu />
           </div>
 
@@ -42,18 +42,6 @@ export const Header = ({ isHomepage = false }: { isHomepage?: boolean }) => {
         {isMenuOpen && (
           <MobileMenu onClose={toggleMenu}>
             <NavMenu/>
-            {/* <nav className="flex flex-col items-center space-y-4 py-4">
-              <Link to="/admin" className="text-gray-700 hover:text-light-blue-phs-system">
-                Área administrativa
-              </Link>
-              <Link to="/aulas" className="text-gray-700 hover:text-light-blue-phs-system">
-                Aulas
-              </Link>
-              <Link to="/minha-conta" className="text-gray-700 hover:text-light-blue-phs-system">
-                Minha conta
-              </Link>
-              <LoginAndRegisterButtons />
-            </nav> */}
           </MobileMenu>
         )}
       </Limiter>
