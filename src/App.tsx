@@ -9,10 +9,14 @@ import { Terms } from "@/pages/Terms";
 import { Admin } from "@/pages/Admin";
 import { Checkout } from "@/pages/Checkout";
 import { StorePolicies } from "@/pages/StorePolicies";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
   return (
+    <>
+    <ToastContainer/>
     <AuthProvider>
       <Routes>
         <Route 
@@ -54,6 +58,7 @@ function App() {
         />
       </Routes>
     </AuthProvider>
+    </>
   );
 }
 

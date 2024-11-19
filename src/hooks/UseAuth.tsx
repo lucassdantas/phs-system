@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import axios from "axios";
 import { backendUrl } from "@/utils/constants/siteInfos";
+import { toast } from "react-toastify";
+import { useNotificationCenter } from "react-toastify/addons/use-notification-center";
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -18,7 +20,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useLocalStorage<User | null>("user", null);
   const [token, setToken] = useLocalStorage<string | null>("token", null);
   const navigate = useNavigate();
-
+  const loggedSuccessfullyToast = () => {
+    toast("Logado com sucesso");
+  };
   const login = async (data: { username: string; password: string }) => {
     try {
       const response = await axios.post(`${backendUrl}/login.php`, {
@@ -28,6 +32,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const { token, userData } = response.data;
       setToken(token);
       setUser(userData);
+      loggedSuccessfullyToast()
       navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
@@ -58,9 +63,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     const checkAuthentication = async () => {
       const valid = await isAuthenticated();
-      if (!valid) {
-        logout(false); 
-      }
+      if (!valid) logout(false); 
     };
 
     checkAuthentication();

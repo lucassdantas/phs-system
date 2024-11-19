@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa'; // Importando o ícone de setinha
 
-const DropdownMenu: React.FC = () => {
+interface DropdrownMenuProps{
+  dropdownItems:{
+    route:string;
+    content:string;
+  }[]
+}
+const DropdownMenu = ({dropdownItems}:DropdrownMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleMouseEnter = () => {
@@ -15,11 +21,12 @@ const DropdownMenu: React.FC = () => {
 
   return (
     <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
-      <button className="text-gray-700 hover:text-light-blue-phs-system flex items-center" > <Link to='/aulas'>Aulas</Link> <FaChevronDown className="ml-1 text-xs" /> </button>
+      <span className="text-gray-700 hover:text-light-blue-phs-system flex items-center" > <Link to='/aulas'>Aulas</Link> <FaChevronDown className="ml-1 text-xs" /> </span>
       {isOpen && (
-        <div className="absolute z-20 py-2 w-48 bg-white shadow-lg rounded-md"   >
-          <Link to="/aulas/fase1" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">Fase 1</Link>
-          <Link to="/aulas/fase2" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">Fase 2</Link>
+        <div className="absolute z-20 py-2 w-48 bg-white shadow-lg rounded-md">
+          {dropdownItems.map((item, i) => (
+            <Link key={i} to={item.route} className="block px-4 py-2 text-gray-700 hover:bg-gray-200">{item.content}</Link>
+          ))}
         </div>
       )}
     </div>
