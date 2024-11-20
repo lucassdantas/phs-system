@@ -5,37 +5,32 @@ import { Popup } from '@/components/Popup'
 import { Table } from '@/components/Table'
 import { ClassesType } from '@/types/classes'
 import { getClasses, getSelectedClassWithMembers } from '@/utils/api/classes/get'
+import { handlePageChange, handleTotalPages } from '@/utils/tableFunctions'
 import { useEffect, useState } from 'react'
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa'
-import { RxDividerHorizontal } from 'react-icons/rx'
 
 export const ClassesTable = () => {
   const [classes, setClasses] = useState<ClassesType[] | null>(null)
   const [selectedClass, setSelectedClass] = useState<ClassesType | null>(null)
   const [selectedClassOffset, setSelectedClassOffset] = useState<number>(0)
+  const [selectedClassMembers, setSelectedClassMembers] = useState('')
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false)
   const [queryResultLimit, setQueryResultLimit] = useState<number>(5)
   const [offSetQueryResults, setOffSetQueryResults] = useState<number>(0)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [totalPages, setTotalPages] = useState<number>(currentPage)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const handleTotalPages = (classQuantities:number) => {
-    const pagesQuantity = (classQuantities/queryResultLimit)
-    if(pagesQuantity % 1 != 0 )  return setTotalPages(Math.trunc(pagesQuantity)+1)
-    return setTotalPages(pagesQuantity)
-  }
 
   const fetchMembersOfSelectedClass = async(selectedClassId:number, limit:number, offset:number) => {
     const classesFromBackend = await getSelectedClassWithMembers(selectedClassId, limit, offset)
-    setClasses(classesFromBackend.classesWithMembers)
-    handleTotalPages(classesFromBackend.classQuantities)
+    setSelectedClassMembers(classesFromBackend.classesWithMembers)
+    handleTotalPages(classesFromBackend.classQuantities, queryResultLimit, setTotalPages)
   }
 
   const fetchAllClasses = async(limit:number, offset:number) => {
     const classesFromBackend = await getClasses(limit, offset)
     setClasses(classesFromBackend.classes)
-    handleTotalPages(classesFromBackend.classQuantity)
+    handleTotalPages(classesFromBackend.classQuantity, queryResultLimit, setTotalPages)
     setIsLoading(false)
   }
 
@@ -43,12 +38,6 @@ export const ClassesTable = () => {
     if(pupilClass) fetchMembersOfSelectedClass(pupilClass.class_id, queryResultLimit, selectedClassOffset)
     setSelectedClass(pupilClass)
     setIsPopupOpen(popupOpen)
-  }
-  
-  const handlePageChange = (pageNumber:number) => {
-    if(pageNumber > totalPages || pageNumber < 1 ) return;
-    setOffSetQueryResults((pageNumber-1)*queryResultLimit)
-    setCurrentPage(pageNumber)
   }
 
   useEffect(() => {
@@ -60,9 +49,9 @@ export const ClassesTable = () => {
   return (
     <div className='overflow-x-scroll'>
       <div className='w-full flex justify-end items-center space-x-4'>
-        <FaLongArrowAltLeft  className='cursor-pointer text-medium-green-phs-system hover:text-medium-blue-phs-system' size={28} onClick={() => handlePageChange(currentPage-1)}/>
+        <FaLongArrowAltLeft  className='cursor-pointer text-medium-green-phs-system hover:text-medium-blue-phs-system' size={28} onClick={() => handlePageChange(currentPage-1, queryResultLimit, totalPages, setOffSetQueryResults, setCurrentPage)}/>
         <span>{currentPage}/{totalPages}</span>
-        <FaLongArrowAltRight className='cursor-pointer text-medium-green-phs-system hover:text-medium-blue-phs-system'  size={28}  onClick={() => handlePageChange(currentPage+1)}/>
+        <FaLongArrowAltRight className='cursor-pointer text-medium-green-phs-system hover:text-medium-blue-phs-system'  size={28}  onClick={() => handlePageChange(currentPage+1, queryResultLimit, totalPages, setOffSetQueryResults, setCurrentPage)}/>
       </div>
       
       <Divider className='mt-4 mb-8'/>

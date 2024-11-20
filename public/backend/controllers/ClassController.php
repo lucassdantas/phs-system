@@ -26,10 +26,11 @@ class ClassController {
                   echo json_encode($class);
                   break;
 
-              case 'getClassesWithMembers':
+              case 'getSelectedClassWithMembers':
                   $limit  = intval($_GET['limit']);
                   $offset = intval($_GET['offset']);
-                  $classes = $this->getClassesWithMembers($limit, $offset);
+                  $id     = intval($_GET['selectedClassId']);
+                  $classes = $this->getClassWithMembers($id, $limit, $offset);
                   echo json_encode($classes);
                   break;
 
@@ -70,37 +71,54 @@ class ClassController {
     public function countClasses(){
       return $classesWithMembersQuantity = $this->classModel->countClasses();
     }
-    public function getClassesWithMembers($limit = 10, $offset = 0){
-      $classesWithMembers = $this->classModel->getClassesWithMembers($limit, $offset);
-      $classQuantities = $this->countClasses()['classes_quantity'];
-      $organizedClassWithMembers = [];
-      $i = 0;
-      foreach ($classesWithMembers as $classWithMembers) {
-        $organizedClassWithMembers[$i] = [
-          'class_id'        => $classWithMembers['class_id'],
-          'class_address'   => $classWithMembers['class_address'],
-          'class_date'      => $classWithMembers['class_date'],
-          'class_vacancies' => $classWithMembers['class_vacancies'],
-          'class_reffered_phase' => $classWithMembers['product_id'],
-          'users' => [
-            "userId"            => $classWithMembers['user_id'],
-            "user_first_name"  => $classWithMembers['first_name'],
-            "user_last_name"   => $classWithMembers['last_name'],
-            "user_email"       => $classWithMembers['email'],
-            "user_phone"       => $classWithMembers['phone'],
-            "user_phase_acquired_id" => $classWithMembers['phase_acquired_id'],
-            "user_address"   => $classWithMembers['address'],
-            "user_city"      => $classWithMembers['city'],
-            "user_state"     => $classWithMembers['state'],
-            "user_zip_code"  => $classWithMembers['zip_code'],
-            "user_user_role" => $classWithMembers['user_role'],
-            "user_joined_at"  => $classWithMembers['joined_at']
-          ],
-        ];
-        $i++;
-      }
-      return json_encode(['classesWithMembers' => $organizedClassWithMembers, 'classQuantities' => $classQuantities]);
+    public function countClassMembers($classId){
+      return $classesWithMembersQuantity = $this->classModel->countClassMembers($classId);
     }
+    public function getClassWithMembers($id, $limit = 10, $offset = 0) {
+      // Obtém a turma com os membros relacionados
+      $classesWithMembers = $this->classModel->getClassWithMembers($id, $limit, $offset);
+      $classQuantities = $this->countClassMembers($id)['members_quantity'];
+  
+      // Verifica se há dados para processar
+      if (empty($classesWithMembers)) {
+          return json_encode(['classesWithMembers' => [], 'classQuantities' => $classQuantities]);
+      }
+  
+      // Inicializa o array da turma e a lista de usuários
+      $organizedClassWithMembers = [
+          'class_id'        => $classesWithMembers[0]['class_id'],
+          'class_address'   => $classesWithMembers[0]['class_address'],
+          'class_date'      => $classesWithMembers[0]['class_date'],
+          'class_vacancies' => $classesWithMembers[0]['class_vacancies'],
+          'class_reffered_phase' => $classesWithMembers[0]['product_id'],
+          'users'           => [] // Lista de usuários será preenchida no loop
+      ];
+  
+      // Adiciona os usuários ao índice 'users'
+      foreach ($classesWithMembers as $classWithMembers) {
+          $organizedClassWithMembers['users'][] = [
+              "userId"            => $classWithMembers['user_id'],
+              "user_first_name"   => $classWithMembers['first_name'],
+              "user_last_name"    => $classWithMembers['last_name'],
+              "user_email"        => $classWithMembers['email'],
+              "user_phone"        => $classWithMembers['phone'],
+              "user_phase_acquired_id" => $classWithMembers['phase_acquired_id'],
+              "user_address"      => $classWithMembers['address'],
+              "user_city"         => $classWithMembers['city'],
+              "user_state"        => $classWithMembers['state'],
+              "user_zip_code"     => $classWithMembers['zip_code'],
+              "user_user_role"    => $classWithMembers['user_role'],
+              "user_joined_at"    => $classWithMembers['joined_at']
+          ];
+      }
+  
+      // Retorna a turma com os usuários e a quantidade total de membros
+      return json_encode([
+          'classesWithMembers' => [$organizedClassWithMembers], // Retorna como lista de turmas
+          'classQuantities' => $classQuantities
+      ]);
+  }
+  
     public function getClassById($id) {
         return $this->classModel->getClassById($id);
     }

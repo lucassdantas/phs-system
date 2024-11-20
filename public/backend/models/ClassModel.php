@@ -13,7 +13,7 @@ class ClassModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getClassesWithMembers($limit, $offset){
+    public function getClassWithMembers($id, $limit, $offset){
       $stmt = $this->db->prepare(
         "SELECT
           classes.class_id,
@@ -42,11 +42,13 @@ class ClassModel {
           classes
         INNER JOIN class_members_list ON classes.class_id = class_members_list.class_id
         INNER JOIN users ON class_members_list.user_id = users.user_id
+        WHERE classes.class_id = :id
         LIMIT :limit OFFSET :offset"
       );
       
       $stmt->bindValue(':limit',  (int)$limit,  PDO::PARAM_INT);
       $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+      $stmt->bindValue(':id',     (int)$id,     PDO::PARAM_INT);
       
       $stmt->execute();
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -55,6 +57,11 @@ class ClassModel {
     public function countClasses(){
       $stmt = $this->db->prepare("SELECT COUNT(class_id) AS classes_quantity FROM classes");
       $stmt->execute();
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function countClassMembers($classId){
+      $stmt = $this->db->prepare("SELECT COUNT(user_id) AS members_quantity FROM class_members_list WHERE class_id = ?");
+      $stmt->execute([$classId]);
       return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function getClassById($id) {
