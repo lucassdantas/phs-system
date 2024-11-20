@@ -5,8 +5,6 @@ export const LessonPhaseForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-  
-  console.log(selectedPhase)
   return (
     <form onSubmit={handleSubmit} className='w-full my-4'>
       <fieldset className="gap-4 w-full">
