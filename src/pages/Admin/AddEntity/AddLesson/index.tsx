@@ -29,7 +29,6 @@ export const AddLesson = () => {
       <Section className='py-12'>
         <div className="flex gap-12">
           <div className='w-2/6'>
-            {/* Adicionei um wrapper com altura total para garantir o sticky */}
             <div className='lg:pr-16 h-full'>
               <nav className='sticky top-12'>
                 <ul className='border border-neutral-300 rounded-xl py-12 pl-0 space-y-4'>
