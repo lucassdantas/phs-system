@@ -2,6 +2,7 @@ import { ColoredContainer } from '@/components/ColoredContainer'
 import { Section } from '@/components/Section'
 import { Template } from '@/components/Template'
 import { ComplementarMaterialTable } from '@/pages/Admin/AddEntity/AddLesson/ComplementarMaterialTable'
+import { LessonPhaseForm } from '@/pages/Admin/AddEntity/AddLesson/LessonPhaseForm'
 import { NameAndDescriptionForm } from '@/pages/Admin/AddEntity/AddLesson/NameAndDescriptionForm'
 import { userImagesDirectory } from '@/utils/constants/siteInfos'
 import React from 'react'
@@ -50,7 +51,7 @@ export const AddLesson = () => {
             </ColoredContainer>
 
             <ColoredContainer cardTitle='Fase do curso'>
-              <NameAndDescriptionForm/>
+              <LessonPhaseForm/>
             </ColoredContainer>
 
             <ColoredContainer cardTitle='Vídeo da aula'>
