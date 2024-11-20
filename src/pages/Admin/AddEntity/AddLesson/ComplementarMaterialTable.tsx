@@ -6,8 +6,7 @@ import { ComplementarMaterialsType } from '@/types/complementarMaterialsType'
 import { useState } from 'react'
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa'
 
-export const ComplementarMaterialTable = () => {
-  const [complementarMaterials, setComplementarMaterials] = useState<ComplementarMaterialsType[]>([])
+export const ComplementarMaterialTable = ({complementarMaterials, setComplementarMaterials}:{complementarMaterials:ComplementarMaterialsType[], setComplementarMaterials:any}) => {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [totalPages, setTotalPages] = useState<number>(1)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -38,7 +37,7 @@ export const ComplementarMaterialTable = () => {
 
   if (isLoading) return <LoadingSpinner />
   return (
-    <div className='overflow-x-scroll'>
+    <div className='overflow-x-scroll' id='materiais'>
       <div className='w-full flex justify-end items-center space-x-4'>
         <FaLongArrowAltLeft
           className='cursor-pointer text-medium-green-phs-system hover:text-medium-blue-phs-system'
@@ -72,7 +71,7 @@ export const ComplementarMaterialTable = () => {
       </Table>
       <form encType='multipart/form-data' className='flex flex-col items-start gap-4 mt-12' >
         <input type='file' onChange={(e) => setNewFile(e.target.files ? e.target.files[0] : null)} />
-        <Button content='Enviar Arquivo' onClick={addNewMaterial} />
+        <Button content='Enviar Arquivo' color='blue' onClick={addNewMaterial} />
       </form>
     </div>
   )

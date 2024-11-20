@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-export const LessonPhaseForm = () => {
-  const [selectedPhase, setSelectedPhase] = useState("");
+export const LessonPhaseForm = ({selectedPhase, setSelectedPhase}:{selectedPhase:string, setSelectedPhase:any}) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
   return (
-    <form onSubmit={handleSubmit} className='w-full my-4'>
+    <form onSubmit={handleSubmit} className='w-full my-4' id='fase'>
       <fieldset className="gap-4 w-full">
         <div className="mb-4 w-full ">
           <label htmlFor='lessonPhase'>Marque a fase do seu curso</label>

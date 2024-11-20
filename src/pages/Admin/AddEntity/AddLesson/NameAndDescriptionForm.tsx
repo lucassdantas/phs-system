@@ -1,25 +1,18 @@
 import { useState } from "react";
 
-const handleCreateLesson = async (title: string, description: string) => {
-  try {
-    //await changeUserData({ title, description });
-  } catch (error) {
-    console.error("Login error:", error);
-    alert("Algo está errado");
-  }
-};
-
-export const NameAndDescriptionForm = () => {
-  const [lessonTitle, setLessonTitle] = useState("");
-  const [lessonDescription, setLessonDescription] = useState("");
-
+type NameAndDescriptionFormProps = {
+  lessonTitle:string,
+  setLessonTitle:any,
+  lessonDescription:string,
+  setLessonDescription:any
+}
+export const NameAndDescriptionForm = ({lessonTitle, setLessonTitle,lessonDescription, setLessonDescription }:NameAndDescriptionFormProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleCreateLesson(lessonTitle, lessonDescription);
   };
 
   return (
-    <form onSubmit={handleSubmit} className='w-full my-4'>
+    <form onSubmit={handleSubmit} className='w-full my-4' id='nome-e-descricao'>
       <fieldset className="gap-4 w-full">
         <div className="mb-4 w-full">
           <input
