@@ -1,6 +1,8 @@
 import { ColoredContainer } from '@/components/ColoredContainer'
 import { Section } from '@/components/Section'
 import { Template } from '@/components/Template'
+import { ComplementarMaterialTable } from '@/pages/Admin/AddEntity/AddLesson/ComplementarMaterialTable'
+import { NameAndDescriptionForm } from '@/pages/Admin/AddEntity/AddLesson/NameAndDescriptionForm'
 import { userImagesDirectory } from '@/utils/constants/siteInfos'
 import React from 'react'
 
@@ -13,7 +15,7 @@ export const AddLesson = () => {
     { url: "#materiais", content: "Materiais" }
   ];
   return (
-    <Template pageTitle='Adicionar Aula'>
+    <Template pageTitle='Adicionar Aula' lastPage={{title:'Admin', route:'admin'}}>
       <Section className='py-12'>
         <div className="flex gap-12">
           <div className='w-2/6'>
@@ -44,19 +46,19 @@ export const AddLesson = () => {
             </ColoredContainer>
 
             <ColoredContainer cardTitle='Nome e descrição do curso'>
-              a
+              <NameAndDescriptionForm/>
             </ColoredContainer>
 
             <ColoredContainer cardTitle='Fase do curso'>
-              a
+              <NameAndDescriptionForm/>
             </ColoredContainer>
 
             <ColoredContainer cardTitle='Vídeo da aula'>
-              a
+              <NameAndDescriptionForm/>
             </ColoredContainer>
 
             <ColoredContainer cardTitle='Materiais complementares'>
-              a
+              <ComplementarMaterialTable/>
             </ColoredContainer>
           </div>
         </div>

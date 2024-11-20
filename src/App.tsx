@@ -13,6 +13,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { AddLesson } from "@/pages/Admin/AddEntity/AddLesson";
+import { AddClass } from "@/pages/Admin/AddEntity/AddClass";
+import { AddInstructor } from "@/pages/Admin/AddEntity/AddInstructor";
 
 function App() {
   return (
@@ -63,6 +65,22 @@ function App() {
           element={
             <ProtectedRoute userRole={['admin']}>
               <AddLesson />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/add-class"
+          element={
+            <ProtectedRoute userRole={['admin']}>
+              <AddClass />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/add-instructor"
+          element={
+            <ProtectedRoute userRole={['admin']}>
+              <AddInstructor />
             </ProtectedRoute>
           }
         />

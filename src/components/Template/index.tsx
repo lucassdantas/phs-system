@@ -8,14 +8,15 @@ type TemplateProps = {
   children:ReactNode;
   pageTitle:string;
   hasBanner?:boolean;
+  lastPage?:{title:string;route:string;};
 }
 
-export const Template = ({children, pageTitle, hasBanner = true}:TemplateProps) => {
+export const Template = ({children, pageTitle, hasBanner = true, lastPage={title:'Home', route:'/'}}:TemplateProps) => {
   return (
     <>
       <Header />
       <main>
-        {hasBanner && <Hero pageTitle={pageTitle}/>}
+        {hasBanner && <Hero pageTitle={pageTitle} lastPage={lastPage}/>}
         {children}
         <CookieBar/>
       </main>

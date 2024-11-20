@@ -4,9 +4,9 @@ import React from 'react'
 
 export const AddInstructor = () => {
   return (
-    <Template pageTitle='Adicionar Instrutor'>
+    <Template pageTitle='Adicionar Instrutor' lastPage={{title:'Admin', route:'admin'}}>
       <Section>
-        <h1></h1>
+        <h1>a</h1>
       </Section>
     </Template>
   )
