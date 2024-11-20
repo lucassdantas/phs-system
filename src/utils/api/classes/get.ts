@@ -21,9 +21,9 @@ export const getOrderById = async (id: number): Promise<ClassesType> => {
         throw error;
     }
 };
-export const getClassesWithMembers = async (limit=10, offset=0): Promise<ClassesType> => {
+export const getSelectedClassWithMembers = async (selectedClassId=0, limit=10, offset=0): Promise<ClassesType> => {
     try {
-        const response = await axios.get(`${backendUrl}/controllers/classController.php?action=getClassesWithMembers&limit=${limit}&offset=${offset}`);
+        const response = await axios.get(`${backendUrl}/controllers/classController.php?action=getClassesWithMembers&limit=${limit}&offset=${offset}&selectedClassId=${selectedClassId}`);
         return JSON.parse(response.data);
     } catch (error) {
         console.error(`Erro ao obter as turmas com seus membros:`, error);
