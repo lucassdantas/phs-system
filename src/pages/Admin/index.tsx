@@ -1,11 +1,11 @@
 import { ColoredContainer } from '@/components/ColoredContainer'
 import { Section } from '@/components/Section'
 import { Template } from '@/components/Template'
-import { ClassChangeRequests } from '@/pages/Admin/ClassChangeRequests'
-import { ClassesTable } from '@/pages/Admin/ClassesTable'
-import { InstructoresList } from '@/pages/Admin/InstructoresList'
-import { LessonsTable } from '@/pages/Admin/LessonsTable'
-import { UsersTable } from '@/pages/Admin/UsersTable'
+import { ClassChangeRequests } from '@/pages/Admin/ClassChangeRequests/ClassChangeRequests'
+import { ClassesTable } from '@/pages/Admin/Classes/ClassesTable'
+import { InstructoresList } from '@/pages/Admin/Instructors/InstructoresList'
+import { LessonsTable } from '@/pages/Admin/Lessons/LessonsTable'
+import { UsersTable } from '@/pages/Admin/Users/UsersTable'
 
 export const Admin = () => {
   return (
